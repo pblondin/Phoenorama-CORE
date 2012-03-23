@@ -1,6 +1,6 @@
 #######
 #
-# Copyright (C) 2011 Phoenorama.org All Rights Reserved.
+# Copyright (C) 2012 Phoenorama.org All Rights Reserved.
 # Author: Philippe Blondin <pblondin@phoenorama.org>>
 #
 # This file is part of the Phoenorama program.
@@ -22,11 +22,12 @@
 #######
 
 '''
-Created on Mar 2, 2011
+Created on Mar 22, 2012
 
 @author: r00tmac
 '''
 import shlex, subprocess, threading, re, csv
+from celery.task import task
 
 class Openvas(threading.Thread):
     '''
@@ -47,7 +48,8 @@ class Openvas(threading.Thread):
         #self.task = OpenVASTask.objects.get(pk=task_id) # Get result object
         self.tool = '/usr/bin/OpenVAS-Client ' # Make sure the leave a space at the end
         self.config = '-T {format} -qx {host} {port} {user} {password} {target} {result}'
-        
+    
+    @task(name="scanner.openvas.configure")
     def configure(self, targetFile, nbeFile):
         '''
         Configure OpenVAS tool by setting the appropriate config information.
@@ -64,7 +66,8 @@ class Openvas(threading.Thread):
         f = open(self.PATH + str(targetFile), 'w')
         f.write(self.task.project.target)
         f.close()
-        
+    
+    @task(name="scanner.openvas.run")
     def run(self):
         '''
         Define how to run OpenVAS and convert the results.
