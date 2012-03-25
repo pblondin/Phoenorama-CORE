@@ -1,0 +1,55 @@
+Openvas
+---------------
+
+Debian 6.0 setup
+
+http://www.openvas.org/install-packages.html#debian
+http://www.greenbone.net/learningcenter/remote_controlled.html
+
+* Setup omp.config $(HOME)/omp.config
+
+[Connection]
+host=localhost
+port=9390
+username=guest
+password=guest
+
+* List of configs
+omp --get-configs
+
+daba56c8-73ec-11df-a475-002264764cea  Full and fast
+698f691e-7489-11df-9d8c-002264764cea  Full and fast ultimate
+708f25c4-7489-11df-8094-002264764cea  Full and very deep
+74db13d6-7489-11df-91b9-002264764cea  Full and very deep ultimate
+
+* List of report formats
+omp --get-report-formats
+
+a0704abb-2120-489f-959f-251c9f4ffebd  CPE
+b993b6f5-f9fb-4e6e-9c94-dd46c00e058d  HTML
+929884c6-c2c4-41e7-befb-2f6aa163b458  ITG
+9f1ab17b-aaaa-411a-8c57-12df446f5588  LaTeX
+f5c2a364-47d2-4700-b21d-0a7693daddab  NBE
+1a60a67e-97d0-4cbf-bc77-f71b08e7043d  PDF
+19f6f1b3-7128-4433-888c-ccc764fe6ed5  TXT
+d5da9f67-8551-4e51-807b-b6a873d70e34  XML
+
+* Create a target
+
+* Create a task
+omp --create-task --name "TASK_NAME" -t "b493b7a8-7489-11df-a3ec-002264764cea" -v -c "daba56c8-73ec-11df-a475-002264764cea"
+
+* Start a task
+omp --start-task "TASK_UUID"	 
+
+* Get task status
+omp --get-tasks "TASK_UUID"
+	  
+* Get progress status (TODO, need a more general solution)
+omp --xml "<get_tasks/>" --pretty-print | grep '<host_progress>' | cut -d '>' -f2
+
+* Get report
+omp --get-report 
+
+
+
