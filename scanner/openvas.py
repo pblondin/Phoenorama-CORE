@@ -42,6 +42,7 @@ class Openvas():
         self.tool = '/usr/bin/omp --username "guest" --password "guest" ' # Make sure the leave a space at the end
         self.target_uuid = ''
         self.task_uuid = ''
+        self.report_uuid = ''
         self.status = ''
 
     @task(name="scanner.openvas.configure")
@@ -68,16 +69,16 @@ class Openvas():
         # Get status and target_uuid #TODO: fix when status is bad (|= 201)
         # Sample: <create_target_response status="201" id="6095d2bf-9e03-4689-a717s -dc8038137004" status_text="OK, resource created"></create_target_response>
         self.status, self.target_uuid = re.search('status="(\d+)"\sid="(\S+)"', retvalue).group(1, 2)
-
+        
         logger.info("Status: %s, Target_UUID: %s" % (self.status, self.target_uuid))
         
         # Create a temporary task
         create_task = "--create-task --name %(uuid)s --target %(target_uuid)s --config daba56c8-73ec-11df-a475-002264764cea" % {"uuid": uuid.uuid4(), "target_uuid": self.target_uuid}
         cmd = shlex.split(self.tool + create_task)
-        retvalue = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
+        self.task_uuid = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
         
-        logger.info("Create task retvalue: %s" % retvalue)
-        return
+        logger.info("Task_uuid: %s" % self.task_uuid)
+        return "Task was successfully configured and is ready to start"
         
     @task(name="scanner.openvas.getStatus")
     def getStatus(self, taskUuid):
@@ -86,17 +87,22 @@ class Openvas():
     @task(name="scanner.openvas.run")
     def run(self):
         '''
-        Define how to run OpenVAS and convert the results.
+        Start OpenVAS task
         
         @postcondition: task was properly configured.
-        
-        1. Start a process to run OpenVAS.
-        2. Parse the NBE result file.
-        3. Add results to the task.
+
         '''
-        cmd = shlex.split(self.tool + self.config)
-        retcode = subprocess.call(cmd)
-        self.__parse(self.task.nbeFile)
+        logger = self.run.get_logger()
+        start_task = "--start-task %s" % (self.task_uuid)
+        cmd = shlex.split(self.tool + start_task)
+        self.report_uuid = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
+    
+        
+        #TODO: Validate start_task status
+        
+        logger.info("Report_uuid: %s" % self.report_uuid)
+        return "Task is successfully started"
+
         
     @task(name="scanner.openvas.getReport")
     def getReport(self):
