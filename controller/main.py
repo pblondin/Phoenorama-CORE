@@ -30,7 +30,7 @@ Task dispatcher
 '''
 
 import argparse
-from scanner.tasks import add
+#from scanner.tasks import add
 
 VERSION = "0.1"
 
@@ -56,7 +56,4 @@ if __name__ == '__main__':
 
     except IOError, msg:
         argparser.error(str(msg))
-        result = add.delay(2, 3) #@UndefinedVariable - prevent PyDev error    
-        print result.get()
-    
 

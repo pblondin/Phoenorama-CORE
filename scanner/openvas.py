@@ -26,12 +26,12 @@ Created on Mar 22, 2012
 
 @author: r00tmac
 '''
-import shlex, subprocess, threading, re, csv
+import shlex, subprocess, re, csv
 from celery.task import task
 
-class Openvas(threading.Thread):
+class Openvas():
     '''
-    Threaded OpenVAS scan
+    Run OpenVAS scan using OMP client (openvas-cli)
        
     Example: 
         OpenVAS-Client -T nbe -qx 127.0.0.1 9390 <user> <pass> /root/openvas/target /var/www/openvas/results.nbe
@@ -41,10 +41,9 @@ class Openvas(threading.Thread):
     USER = 'user'
     PASSWORD = 'password'
     FORMAT = 'nbe'
-    PATH = './resources/results/'
+    PATH = './results/'
     
     def __init__(self, task_id):
-        threading.Thread.__init__(self)
         #self.task = OpenVASTask.objects.get(pk=task_id) # Get result object
         self.tool = '/usr/bin/OpenVAS-Client ' # Make sure the leave a space at the end
         self.config = '-T {format} -qx {host} {port} {user} {password} {target} {result}'
@@ -72,26 +71,13 @@ class Openvas(threading.Thread):
         '''
         Define how to run OpenVAS and convert the results.
         
-        1. Start a thread to run OpenVAS.
+        1. Start a process to run OpenVAS.
         2. Parse the NBE result file.
         3. Add results to the task.
         '''
         cmd = shlex.split(self.tool + self.config)
-        self.task.state = 's'     # Set the state to "Started"
-        self.task.save()
-        print "Thread started"
-        retcode = subprocess.call(cmd)
-        print "Thread finished with retcode: %s" % (str(retcode))
-        if retcode == '0':                
-            self.task.state = 'x'  # Set the state to "Error"
-            self.task.save()
-        else:
-            self.task.state = 'e'  # Set the state to "Ended"
-            self.task.nbeFile = self.PATH + str(self.task.nbeFile)
-            
-            # Start the NBE parsing
-            self.__parse(self.task.nbeFile)                
-            self.task.save()
+        subprocess.call(cmd)
+        self.__parse(self.task.nbeFile)
                
     def __parse(self, nbe_file):
         '''
