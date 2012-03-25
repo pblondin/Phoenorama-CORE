@@ -34,37 +34,50 @@ class Openvas():
     OpenVAS wrapper using omp client tool interface to communicate with OpenVAS manager and scanner.
         http://www.openvas.org/install-packages.html#debian
         http://www.greenbone.net/learningcenter/remote_controlled.html
-        
+
     @version: 0.1
     '''
-    
+
     def __init__(self):
         self.tool = '/usr/bin/omp --username "guest" --password "guest" ' # Make sure the leave a space at the end
-        #self.task = OpenVASTask.objects.get(pk=task_id) # Get result object
-    
+        self.target_uuid = ''
+        self.task_uuid = ''
+        self.status = ''
+
     @task(name="scanner.openvas.configure")
     def configure(self, target, **kwargs):
         '''
         Configure omp client tool.
-        
+
+        List of config scans:
+                daba56c8-73ec-11df-a475-002264764cea  Full and fast
+                698f691e-7489-11df-9d8c-002264764cea  Full and fast ultimate
+                708f25c4-7489-11df-8094-002264764cea  Full and very deep
+                74db13d6-7489-11df-91b9-002264764cea  Full and very deep ultimate
+
         @requires: omp.config is already configured on the scanning nodes with credentials.
         @requires: openvassd and openvasmd deamons are running on the scanning nodes.
         '''
         logger = self.configure.get_logger()
-        uuid = uuid.uuid4()
-        
+
         # Create a temporary target
-        create_target = "--xml '<create_target><name>%(uuid)s</name><hosts>%(hosts)s</hosts></create_target>'" % {"uuid": uuid, "hosts": target}
+        create_target = "--xml '<create_target><name>%(uuid)s</name><hosts>%(hosts)s</hosts></create_target>'" % {"uuid": uuid.uuid4(), "hosts": target}
         cmd = shlex.split(self.tool + create_target)
-        retvalue = subprocess.check_output(cmd)
-        logger.info(retvalue)
-        
-        # Get target_uuid
-        target_uuid = "omp -T | grep %(uuid)s | cut -d' ' -f1" % {"uuid": uuid}
+        retvalue = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
 
-        
-        return target_uuid
+        # Get status and target_uuid #TODO: fix when status is bad (|= 201)
+        # Sample: <create_target_response status="201" id="6095d2bf-9e03-4689-a717s -dc8038137004" status_text="OK, resource created"></create_target_response>
+        self.status, self.target_uuid = re.search('status="(\d+)"\sid="(\S+)"', retvalue).group(1, 2)
 
+        logger.info("Status: %s, Target_UUID: %s" % (self.status, self.target_uuid))
+        
+        # Create a temporary task
+        create_task = "--create-task --name %(uuid)s --target %(target_uuid)s --config daba56c8-73ec-11df-a475-002264764cea" % {"uuid": uuid.uuid4(), "target_uuid": self.target_uuid}
+        cmd = shlex.split(self.tool + create_task)
+        retvalue = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
+        
+        logger.info("Create task retvalue: %s" % retvalue)
+        return
         
     @task(name="scanner.openvas.getStatus")
     def getStatus(self, taskUuid):
