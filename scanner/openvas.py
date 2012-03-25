@@ -39,7 +39,7 @@ class Openvas():
     '''
     
     def __init__(self):
-        self.tool = '/usr/bin/omp --username "guest" --password "guest" -v ' # Make sure the leave a space at the end
+        self.tool = '/usr/bin/omp --username "guest" --password "guest" ' # Make sure the leave a space at the end
         #self.task = OpenVASTask.objects.get(pk=task_id) # Get result object
     
     @task(name="scanner.openvas.configure")
@@ -50,13 +50,19 @@ class Openvas():
         @requires: omp.config is already configured on the scanning nodes with credentials.
         @requires: openvassd and openvasmd deamons are running on the scanning nodes.
         '''
-        logger = self.get_logger()
+        logger = self.configure.get_logger()
+        uuid = uuid.uuid4()
         
         # Create a temporary target
-        create_target = "--xml '<create_target><name>%(name)s</name><hosts>%(hosts)s</hosts></create_target>'" % {"name": uuid.uuid4(), "hosts": target}
+        create_target = "--xml '<create_target><name>%(uuid)s</name><hosts>%(hosts)s</hosts></create_target>'" % {"uuid": uuid, "hosts": target}
         cmd = shlex.split(self.tool + create_target)
-        logger.info(cmd)
-        target_uuid = subprocess.call(cmd)
+        retvalue = subprocess.check_output(cmd)
+        logger.info(retvalue)
+        
+        # Get target_uuid
+        target_uuid = "omp -T | grep %(uuid)s | cut -d' ' -f1" % {"uuid": uuid}
+
+        
         return target_uuid
 
         
