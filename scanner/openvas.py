@@ -38,7 +38,7 @@ class Openvas():
     @version: 0.1
     '''
     
-    def __init__(self, task_id):
+    def __init__(self):
         self.tool = '/usr/bin/omp --username "guest" --password "guest" -v ' # Make sure the leave a space at the end
         #self.task = OpenVASTask.objects.get(pk=task_id) # Get result object
     
@@ -52,8 +52,9 @@ class Openvas():
         '''
         
         # Create a temporary target
-        create_target = "<create_target><name>%(name)s</name><hosts>%(hosts)s</hosts></create_target>" % {"name": uuid.uuid4(), "hosts": target}
+        create_target = "--xml '<create_target><name>%(name)s</name><hosts>%(hosts)s</hosts></create_target>'" % {"name": uuid.uuid4(), "hosts": target}
         cmd = shlex.split(self.tool + create_target)
+        print cmd 
         target_uuid = subprocess.call(cmd)
         return target_uuid
 
