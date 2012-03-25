@@ -50,11 +50,12 @@ class Openvas():
         @requires: omp.config is already configured on the scanning nodes with credentials.
         @requires: openvassd and openvasmd deamons are running on the scanning nodes.
         '''
+        logger = self.get_logger()
         
         # Create a temporary target
         create_target = "--xml '<create_target><name>%(name)s</name><hosts>%(hosts)s</hosts></create_target>'" % {"name": uuid.uuid4(), "hosts": target}
         cmd = shlex.split(self.tool + create_target)
-        print cmd 
+        logger.info(cmd)
         target_uuid = subprocess.call(cmd)
         return target_uuid
 
