@@ -26,58 +26,64 @@ Created on Mar 22, 2012
 
 @author: r00tmac
 '''
-import shlex, subprocess, re, csv
+import shlex, subprocess, re, csv, uuid
 from celery.task import task
 
 class Openvas():
     '''
-    Run OpenVAS scan using OMP client (openvas-cli)
-       
-    Example: 
-        OpenVAS-Client -T nbe -qx 127.0.0.1 9390 <user> <pass> /root/openvas/target /var/www/openvas/results.nbe
+    OpenVAS wrapper using omp client tool interface to communicate with OpenVAS manager and scanner.
+        http://www.openvas.org/install-packages.html#debian
+        http://www.greenbone.net/learningcenter/remote_controlled.html
+        
+    @version: 0.1
     '''
-    HOST = '127.0.0.1'
-    PORT = 9390
-    USER = 'user'
-    PASSWORD = 'password'
-    FORMAT = 'nbe'
-    PATH = './results/'
     
     def __init__(self, task_id):
+        self.tool = '/usr/bin/omp --username "guest" --password "guest" -v ' # Make sure the leave a space at the end
         #self.task = OpenVASTask.objects.get(pk=task_id) # Get result object
-        self.tool = '/usr/bin/OpenVAS-Client ' # Make sure the leave a space at the end
-        self.config = '-T {format} -qx {host} {port} {user} {password} {target} {result}'
     
     @task(name="scanner.openvas.configure")
-    def configure(self, targetFile, nbeFile):
+    def configure(self, target, **kwargs):
         '''
-        Configure OpenVAS tool by setting the appropriate config information.
+        Configure omp client tool.
+        
+        @requires: omp.config is already configured on the scanning nodes with credentials.
+        @requires: openvassd and openvasmd deamons are running on the scanning nodes.
         '''
-        self.config = self.config.format(format=self.FORMAT, 
-                                         host=self.HOST, 
-                                         port=self.PORT, 
-                                         user=self.USER, 
-                                         password=self.PASSWORD,
-                                         target=self.PATH + str(targetFile), 
-                                         result=self.PATH + str(nbeFile))
+        
+        # Create a temporary target
+        create_target = "<create_target><name>%(name)s</name><hosts>%(hosts)s</hosts></create_target>" % {"name": uuid.uuid4(), "hosts": target}
+        cmd = shlex.split(self.tool + create_target)
+        target_uuid = subprocess.call(cmd)
+        return target_uuid
 
-        # Write the targetFile
-        f = open(self.PATH + str(targetFile), 'w')
-        f.write(self.task.project.target)
-        f.close()
+        
+    @task(name="scanner.openvas.getStatus")
+    def getStatus(self, taskUuid):
+        pass
     
     @task(name="scanner.openvas.run")
     def run(self):
         '''
         Define how to run OpenVAS and convert the results.
         
+        @postcondition: task was properly configured.
+        
         1. Start a process to run OpenVAS.
         2. Parse the NBE result file.
         3. Add results to the task.
         '''
         cmd = shlex.split(self.tool + self.config)
-        subprocess.call(cmd)
+        retcode = subprocess.call(cmd)
         self.__parse(self.task.nbeFile)
+        
+    @task(name="scanner.openvas.getReport")
+    def getReport(self):
+        pass
+        
+    @task(name="scanner.openvas.cleanup")
+    def cleanup(self):
+        pass
                
     def __parse(self, nbe_file):
         '''
