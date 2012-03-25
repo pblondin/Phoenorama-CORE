@@ -11,7 +11,8 @@ CELERY_RESULT_BACKEND = "amqp"
 #CELERY_RESULT_DBURI = "sqlite:///mydatabase.db"
 
 ## Broker settings.
-BROKER_URL = "amqp://guest:guest@localhost:5672//"
+#BROKER_URL = "amqp://guest:guest@localhost:5672//"
+BROKER_URL = "amqp://guest:guest@10.0.1.16:5672//"
 
 ## Worker settings
 ## If you're doing mostly I/O you can have more processes,
