@@ -13,5 +13,5 @@ if __name__ == '__main__':
     result = o.configure.delay(o, "10.0.1.0/24")
     print result.get()
     
-    result = o.run.delay(o, o.task_uuid)
+    result = o.run.delay(o)
     print result.get()
