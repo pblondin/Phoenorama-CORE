@@ -45,47 +45,8 @@ class Openvas():
         self.report_uuid = ''
         self.status = ''
 
-    @task(name="scanner.openvas.configure")
-    def configure(self, target, **kwargs):
-        '''
-        Configure omp client tool.
-
-        List of config scans:
-                daba56c8-73ec-11df-a475-002264764cea  Full and fast
-                698f691e-7489-11df-9d8c-002264764cea  Full and fast ultimate
-                708f25c4-7489-11df-8094-002264764cea  Full and very deep
-                74db13d6-7489-11df-91b9-002264764cea  Full and very deep ultimate
-
-        @requires: omp.config is already configured on the scanning nodes with credentials.
-        @requires: openvassd and openvasmd deamons are running on the scanning nodes.
-        '''
-        logger = self.configure.get_logger()
-
-        # Create a temporary target
-        create_target = "--xml '<create_target><name>%(uuid)s</name><hosts>%(hosts)s</hosts></create_target>'" % {"uuid": uuid.uuid4(), "hosts": target}
-        cmd = shlex.split(self.tool + create_target)
-        retvalue = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
-
-        # Get status and target_uuid #TODO: fix when status is bad (|= 201)
-        # Sample: <create_target_response status="201" id="6095d2bf-9e03-4689-a717s -dc8038137004" status_text="OK, resource created"></create_target_response>
-        self.status, self.target_uuid = re.search('status="(\d+)"\sid="(\S+)"', retvalue).group(1, 2)
-        
-        logger.info("Status: %s, Target_UUID: %s" % (self.status, self.target_uuid))
-        
-        # Create a temporary task
-        create_task = "--create-task --name %(uuid)s --target %(target_uuid)s --config daba56c8-73ec-11df-a475-002264764cea" % {"uuid": uuid.uuid4(), "target_uuid": self.target_uuid}
-        cmd = shlex.split(self.tool + create_task)
-        self.task_uuid = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
-        
-        logger.info("Task_uuid: %s" % self.task_uuid)
-        return "Task was successfully configured and is ready to start"
-        
-    @task(name="scanner.openvas.getStatus")
-    def getStatus(self, taskUuid):
-        pass
-    
     @task(name="scanner.openvas.run")
-    def run(self):
+    def run(self, target, **kwargs):
         '''
         Start OpenVAS task
         
@@ -93,6 +54,8 @@ class Openvas():
 
         '''
         logger = self.run.get_logger()
+        self.__configure(target)
+        
         start_task = "--start-task %s" % (self.task_uuid)
         cmd = shlex.split(self.tool + start_task)
         self.report_uuid = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
@@ -103,6 +66,9 @@ class Openvas():
         logger.info("Report_uuid: %s" % self.report_uuid)
         return "Task is successfully started"
 
+    @task(name="scanner.openvas.getStatus")
+    def getStatus(self, taskUuid):
+        pass
         
     @task(name="scanner.openvas.getReport")
     def getReport(self):
@@ -111,7 +77,43 @@ class Openvas():
     @task(name="scanner.openvas.cleanup")
     def cleanup(self):
         pass
-               
+
+    #############################################
+    # Private methods
+    #############################################
+    def __configure(self, target, **kwargs):
+        '''
+        Private method to configure omp client tool.
+
+        List of config scans:
+                daba56c8-73ec-11df-a475-002264764cea  Full and fast
+                698f691e-7489-11df-9d8c-002264764cea  Full and fast ultimate
+                708f25c4-7489-11df-8094-002264764cea  Full and very deep
+                74db13d6-7489-11df-91b9-002264764cea  Full and very deep ultimate
+
+        @requires: omp.config is already configured on the scanning nodes with credentials.
+        @requires: openvassd and openvasmd deamons are running on the scanning nodes.
+        '''
+
+        # Create a temporary target
+        create_target = "--xml '<create_target><name>%(uuid)s</name><hosts>%(hosts)s</hosts></create_target>'" % {"uuid": uuid.uuid4(), "hosts": target}
+        cmd = shlex.split(self.tool + create_target)
+        retvalue = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
+
+        # Get status and target_uuid #TODO: fix when status is bad (|= 201)
+        # Sample: <create_target_response status="201" id="6095d2bf-9e03-4689-a717s -dc8038137004" status_text="OK, resource created"></create_target_response>
+        self.status, self.target_uuid = re.search('status="(\d+)"\sid="(\S+)"', retvalue).group(1, 2)
+        
+        #logger.info("Status: %s, Target_UUID: %s" % (self.status, self.target_uuid))
+        
+        # Create a temporary task
+        create_task = "--create-task --name %(uuid)s --target %(target_uuid)s --config daba56c8-73ec-11df-a475-002264764cea" % {"uuid": uuid.uuid4(), "target_uuid": self.target_uuid}
+        cmd = shlex.split(self.tool + create_task)
+        self.task_uuid = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
+        
+        #logger.info("Task_uuid: %s" % self.task_uuid)
+        return "Task was successfully configured and is ready to start"
+                       
     def __parse(self, nbe_file):
         '''
         A private method for parsing a NBE file (OpenVAS, Nessus) and convert into our RESULT model.         
@@ -149,9 +151,6 @@ class Openvas():
         except IOError, msg:
             print (str(msg))
 
-    #############################################
-    # Private methods for parsing
-    #############################################
     def __getrisklevel(self, risk, value):
         result = 'u' # Unknown        
         if risk == "Security Hole":
