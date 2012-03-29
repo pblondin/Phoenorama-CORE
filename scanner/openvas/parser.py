@@ -1,3 +1,26 @@
+#######
+#
+# Copyright (C) 2012 Phoenorama.org All Rights Reserved.
+# Author: Philippe Blondin <pblondin@phoenorama.org>>
+#
+# This file is part of the Phoenorama program.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; see the file COPYING. If not, write to
+# the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+#######
+
 '''
 Created on Mar 27, 2012
 
@@ -111,7 +134,7 @@ def parseXML(document):
         bid = result.xpath('nvt/bid')[0].text
         vuln.references['bid'] = bid if bid != 'NOBID' else None
         
-        # append vuln to vulnerabilities dictionary
+        # add vuln to vulnerabilities dictionary
         vulnerabilities[host].append(vuln)
       
     openPorts = {}
@@ -127,7 +150,7 @@ def parseXML(document):
 
 def __cleanupVulnerabilities(vulnerabilities):
     # get rid of general information and open ports (duplicate information)
-    filterOIDs = ['1.3.6.1.4.1.25623.1.0.900239',   # open tcp ports
+    filterOIDs = ['1.3.6.1.4.1.25623.1.0.900239',  # open tcp ports
                  '1.3.6.1.4.1.25623.1.0.103978',   # open upd ports
                  '1.3.6.1.4.1.25623.1.0.51662',    # traceroute
                  '1.3.6.1.4.1.25623.1.0.90022',    # ssh autorization
