@@ -83,7 +83,7 @@ def saveReport(reportUuid):
     
     openvasReport = db.openvasReport
     
-    taskReport = {'report_uuid': reportUuid, 'open_ports': report.open_ports, 'vulnerabilities': report.vulnerabilitie}
+    taskReport = {'report_uuid': reportUuid, 'open_ports': report.open_ports, 'vulnerabilities': report.vulnerabilities}
     openvasReport.insert(taskReport)
     return "Report was successfully generated and saved to DB"
     
