@@ -68,7 +68,7 @@ def getReport(reportUuid):
     
     report_xml = str(uuid.uuid4()) + ".xml"
     
-    getReport_task = "--get-report %s > " % (reportUuid, report_xml)
+    getReport_task = "--get-report %s > %s" % (reportUuid, report_xml)
     cmd = shlex.split(TOOL_PATH + getReport_task)
     subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
     
