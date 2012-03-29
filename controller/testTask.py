@@ -4,11 +4,16 @@ Created on Mar 24, 2012
 @author: r00tme
 '''
 
-from scanner.simpleTask import add
-from scanner.openvas import Openvas
+from scanner.openvas.model import Openvas
+from scanner.openvas.tasks import run
+
 
 if __name__ == '__main__':
-    #result = add.delay(2, 3) #@UndefinedVariable - prevent PyDev error
+
     o = Openvas()
-    result = o.configure.run(o, "10.0.1.0/24")
+    o.name = "Basic test"
+    o.description = "Openvas scan against localhost"
+    o.target = "localhost"
+    result = run.delay(o.target) #@UndefinedVariable - prevent PyDev error
+    #o.task_uuid, o.report_uuid = result.wait()
     print result.wait()
