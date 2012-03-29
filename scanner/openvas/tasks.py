@@ -20,6 +20,7 @@
 # the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 #
 #######
+import StringIO
 
 
 '''
@@ -70,11 +71,11 @@ def getReport(reportUuid):
     
     getReport_task = "--get-report %s > %s" % (reportUuid, report_xml)
     cmd = shlex.split(TOOL_PATH + getReport_task)
-    r = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
+    report_xml = StringIO(subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0])
     
-    logger.info("Retvalue: %s" % r)
+    logger.info("Retvalue: %s" % report_xml)
     
-    logger.info("Report successfully generated: %s" % report_xml)
+    #logger.info("Report successfully generated: %s" % report_xml)
     
     report = Report()
     report.open_ports, report.vulnerabilities = parseXML(file(report_xml, 'r'))
