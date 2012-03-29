@@ -33,6 +33,7 @@ OpenVAS wrapper using omp client tool interface to communicate with OpenVAS mana
 @author: r00tmac
 '''
 import shlex, subprocess, re, uuid
+from parser import Report, parseXML
 from celery.task import task
 
 TOOL_PATH = '/usr/bin/omp --username "guest" --password "guest" ' # Make sure the leave a space at the end
@@ -50,20 +51,32 @@ def run(target, **kwargs):
     start_task = "--start-task %s" % (task_uuid)
     cmd = shlex.split(TOOL_PATH + start_task)
     report_uuid = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
-
     
     #TODO: Validate start_task status
     
     logger.info("Report_uuid: %s" % report_uuid)
-    return "Task is successfully started"
+    logger.info("Task is successfully started")
+    return task_uuid, report_uuid
 
 @task(name="openvas.getStatus")
 def getStatus(taskUuid):
     pass
     
 @task(name="openvas.getReport")
-def getReport():
-    pass
+def getReport(reportUuid):
+    logger = getReport.get_logger()
+    
+    report_xml = str(uuid.uuid4()) + ".xml"
+    
+    getReport_task = "--get-report %s > " % (reportUuid, report_xml)
+    cmd = shlex.split(TOOL_PATH + getReport_task)
+    subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
+    
+    logger.info("Report successfully generated: %s" % report_xml)
+    
+    report = Report()
+    report.open_ports, report.vulnerabilities = parseXML(file(report_xml, 'r'))
+    logger.info(report.printFullReport())
     
 @task(name="openvas.cleanup")
 def cleanup():
