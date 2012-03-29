@@ -34,7 +34,7 @@ OpenVAS wrapper using omp client tool interface to communicate with OpenVAS mana
 @author: r00tmac
 '''
 import shlex, subprocess, re, uuid
-from parser import Report, parseXML
+from parser import parseXML
 from celery.task import task
 
 TOOL_PATH = '/usr/bin/omp --username "guest" --password "guest" ' # Make sure the leave a space at the end
@@ -67,9 +67,6 @@ def getStatus(taskUuid):
 def saveReport(reportUuid):
     logger = saveReport.get_logger()
 
-    connection = Connection()
-    db = connection.phoenorama
-
     getReport_task = "--get-report %s" % (reportUuid)
     cmd = shlex.split(TOOL_PATH + getReport_task)
     report_xml = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]    
@@ -77,16 +74,12 @@ def saveReport(reportUuid):
     
     logger.info("Retvalue: %s" % report_xml)
   
-    report = Report()
-    report.open_ports, report.vulnerabilities = parseXML(StringIO(report_xml))
+    report = parseXML(StringIO(report_xml))
     logger.info(report.printFullReport())
     
-    openvasReport = db.openvasReport
-    openPortsJSON = {uuid.uuid4(): report.open_ports}
-    vulnerabilitiesJSON = {uuid.uuid4(): report.vulnerabilities}
+    openvasReport = Connection().phoenorama.openvasReport    
+    openvasReport.insert(report.toJSON())
     
-    taskReport = {'report_uuid': reportUuid, 'open_ports': openPortsJSON, 'vulnerabilities': vulnerabilitiesJSON}
-    openvasReport.insert(taskReport)
     return "Report was successfully generated and saved to DB"
     
 @task(name="openvas.cleanup")
