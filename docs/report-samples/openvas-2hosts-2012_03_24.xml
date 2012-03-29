@@ -1,0 +1,282 @@
+<report extension="xml" id="3fcedb7e-8bc3-44e5-bce8-aeabf7d5208a" content_type="text/xml" format_id="d5da9f67-8551-4e51-807b-b6a873d70e34"><report id="3fcedb7e-8bc3-44e5-bce8-aeabf7d5208a"><report_format></report_format><sort><field>ROWID<order>ascending</order></field></sort><filters>hmlgd<phrase></phrase><notes>0</notes><overrides>0</overrides><apply_overrides>0</apply_overrides><result_hosts_only>0</result_hosts_only><min_cvss_base></min_cvss_base><filter>High</filter><filter>Medium</filter><filter>Low</filter><filter>Log</filter><filter>Debug</filter></filters><scan_run_status>Done</scan_run_status><task id="d070f134-5f26-4896-b98e-c77036109391"><name>abd33fe3-7ec6-41e9-b046-9c1bd92eb74d</name></task><scan_start>Sun Mar 25 20:55:41 2012</scan_start><ports start="0" max="-1"><port>nfs (2049/tcp)<host>10.0.1.18</host><threat>Log</threat></port><port>netvenuechat (1023/tcp)<host>10.0.1.18</host><threat>Log</threat></port><port>general/HOST-T<host>10.0.1.18</host><threat>Log</threat></port><port>general/CPE-T<host>10.0.1.18</host><threat>Log</threat></port><port>epmd (4369/tcp)<host>10.0.1.18</host><threat>Log</threat></port><port>agentx (705/tcp)<host>10.0.1.18</host><threat>Log</threat></port><port>sunrpc (111/udp)<host>10.0.1.18</host><threat>Low</threat></port><port>sunrpc (111/tcp)<host>10.0.1.18</host><threat>Low</threat></port><port>ntp (123/udp)<host>10.0.1.18</host><threat>Low</threat></port><port>general/tcp<host>10.0.1.18</host><threat>Low</threat></port><port>nfs (2049/udp)<host>10.0.1.18</host><threat>High</threat></port><port>netbios-ns (137/udp)<host>10.0.1.23</host><threat>Log</threat></port><port>general/SMBClient<host>10.0.1.23</host><threat>Log</threat></port><port>general/HOST-T<host>10.0.1.23</host><threat>Log</threat></port><port>general/CPE-T<host>10.0.1.23</host><threat>Log</threat></port><port>netbios-ssn (139/tcp)<host>10.0.1.23</host><threat>Low</threat></port><port>general/tcp<host>10.0.1.23</host><threat>Low</threat></port><port>epmap (135/tcp)<host>10.0.1.23</host><threat>Low</threat></port><port>microsoft-ds (445/tcp)<host>10.0.1.23</host><threat>Medium</threat></port></ports><result_count>47<full>47</full><filtered>47</filtered><debug><full>0</full><filtered>0</filtered></debug><hole><full>1</full><filtered>1</filtered></hole><info><full>20</full><filtered>20</filtered></info><log><full>25</full><filtered>25</filtered></log><warning><full>1</full><filtered>1</filtered></warning><false_positive><full>0</full><filtered>0</filtered></false_positive></result_count><results start="0" max="-1"><result id="67b1320b-813b-4ba9-a3d6-c031e70dbf97"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>epmap (135/tcp)</port><nvt oid="0"><name></name><cvss_base></cvss_base><risk_factor></risk_factor><cve></cve><bid></bid></nvt><threat>Log</threat><description>Open port.</description></result><result id="47325673-fe2b-47b9-9abf-11876c8f6158"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>netbios-ssn (139/tcp)</port><nvt oid="0"><name></name><cvss_base></cvss_base><risk_factor></risk_factor><cve></cve><bid></bid></nvt><threat>Log</threat><description>Open port.</description></result><result id="dae23c9d-8107-4792-a2dc-99842e9ff227"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>microsoft-ds (445/tcp)</port><nvt oid="0"><name></name><cvss_base></cvss_base><risk_factor></risk_factor><cve></cve><bid></bid></nvt><threat>Log</threat><description>Open port.</description></result><result id="0262ada6-7e31-44b4-ace2-55fcca0e9963"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.90022"><name>SSH Authorization</name><cvss_base>0.0</cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>No port for an ssh connect was found open.
+Hence local security checks might not work.
+</description></result><result id="db085fd1-6264-4646-b6a0-5362a1057348"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>microsoft-ds (445/tcp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.11011"><name>SMB on port 445</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>A CIFS server is running on this port
+</description></result><result id="1284825f-9df7-4c0e-afc2-3cc0941e9173"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>netbios-ssn (139/tcp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.11011"><name>SMB on port 445</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>An SMB server is running on this port
+</description></result><result id="c8ccbab9-4aae-47b7-8bfe-89d18bc19ac5"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>microsoft-ds (445/tcp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.102011"><name>SMB NativeLanMan</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>
+Overview:
+It is possible to extract OS, domain and SMB server information
+from the Session Setup AndX Response packet which is generated
+during NTLM authentication.
+Detected SMB workgroup: WORKGROUP
+Detected SMB server: Windows 7 Ultimate 6.1
+Detected OS: Windows 7 Ultimate 7601 Service Pack 1
+
+</description></result><result id="f979663d-10db-435d-9b5d-cda0cb098c31"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>netbios-ns (137/udp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.10150"><name>Using NetBIOS to retrieve information from a Windows host</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>The following 3 NetBIOS names have been gathered :
+ GUEST-PC       = This is the computer name registered for workstation services by a WINS client.
+ WORKGROUP       = Workgroup / Domain name
+ GUEST-PC       = Computer name
+The remote host has the following MAC address on its adapter :
+   00:0a:11:00:af:ff
+
+If you do not want to allow everyone to find the NetBios name
+of your computer, you should filter incoming traffic to this port.
+</description></result><result id="a9e2fd3b-b899-4773-8430-acf404905e9d"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>epmap (135/tcp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.10736"><name>DCE Services Enumeration</name><cvss_base></cvss_base><risk_factor>Low</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>
+Distributed Computing Environment (DCE) services running on the remote host 
+can be enumerated by connecting on port 135 and doing the appropriate queries. 
+
+An attacker may use this fact to gain more knowledge
+about the remote host.
+
+Solution : filter incoming traffic to this port.
+</description></result><result id="c6fd98a8-7a82-4123-8f70-510b9fb80517"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>epmap (135/tcp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.10736"><name>DCE Services Enumeration</name><cvss_base></cvss_base><risk_factor>Low</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>Distributed Computing Environment (DCE) services running on the remote host
+can be enumerated by connecting on port 135 and doing the appropriate queries.
+
+An attacker may use this fact to gain more knowledge
+about the remote host.
+
+
+Here is the list of DCE services running on this host:
+
+Port: 49152/tcp
+
+     UUID: d95afe70-a6d5-4259-822e-2c84da1ddb0d, version 1
+     Endpoint: ncacn_ip_tcp:10.0.1.23[49152]
+
+Port: 49153/tcp
+
+     UUID: f6beaff7-1e19-4fbb-9f8f-b89e2018337c, version 1
+     Endpoint: ncacn_ip_tcp:10.0.1.23[49153]
+     Annotation: Event log TCPIP
+
+     UUID: 30adc50c-5cbc-46ce-9a0e-91914789e23c, version 1
+     Endpoint: ncacn_ip_tcp:10.0.1.23[49153]
+     Annotation: NRP server endpoint
+
+     UUID: 3c4728c5-f0ab-448b-bda1-6ce01eb0a6d6, version 1
+     Endpoint: ncacn_ip_tcp:10.0.1.23[49153]
+     Annotation: DHCPv6 Client LRPC Endpoint
+
+     UUID: 3c4728c5-f0ab-448b-bda1-6ce01eb0a6d5, version 1
+     Endpoint: ncacn_ip_tcp:10.0.1.23[49153]
+     Annotation: DHCP Client LRPC Endpoint
+
+     UUID: 06bba54a-be05-49f9-b0a0-30f790261023, version 1
+     Endpoint: ncacn_ip_tcp:10.0.1.23[49153]
+     Annotation: Security Center
+
+Port: 49154/tcp
+
+     UUID: 86d35949-83c9-4044-b424-db363231fd0c, version 1
+     Endpoint: ncacn_ip_tcp:10.0.1.23[49154]
+
+     UUID: 552d076a-cb29-4e44-8b6a-d15e59e2c0af, version 1
+     Endpoint: ncacn_ip_tcp:10.0.1.23[49154]
+     Annotation: IP Transition Configuration endpoint
+
+     UUID: 98716d03-89ac-44c7-bb8c-285824e51c4a, version 1
+     Endpoint: ncacn_ip_tcp:10.0.1.23[49154]
+     Annotation: XactSrv service
+
+Port: 49155/tcp
+
+     UUID: 367abb81-9844-35f1-ad32-98f038001003, version 2
+     Endpoint: ncacn_ip_tcp:10.0.1.23[49155]
+
+Port: 49160/tcp
+
+     UUID: 12345778-1234-abcd-ef00-0123456789ac, version 1
+     Endpoint: ncacn_ip_tcp:10.0.1.23[49160]
+     Named pipe : lsass
+     Win32 service or process : lsass.exe
+     Description : SAM access
+
+     UUID: b25a52bf-e5dd-4f4a-aea6-8ca7272a0e86, version 1
+     Endpoint: ncacn_ip_tcp:10.0.1.23[49160]
+     Annotation: KeyIso
+
+
+
+Solution : filter incoming traffic to this port(s).
+</description></result><result id="e5eb3afa-25e9-4ad1-b92f-a84025e83665"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.102002"><name>OS fingerprinting</name><cvss_base>0.0</cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>ICMP based OS fingerprint results: (80% confidence)
+
+HP JetDirect
+</description></result><result id="9f792e43-3205-4d3c-84d7-c060fefc14bd"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.900239"><name>Checks for open tcp ports</name><cvss_base>0.0</cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>Open TCP ports: 445, 135, 139
+</description></result><result id="f7674827-a0cd-4db5-beba-9582617418c7"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>sunrpc (111/tcp)</port><nvt oid="0"><name></name><cvss_base></cvss_base><risk_factor></risk_factor><cve></cve><bid></bid></nvt><threat>Log</threat><description>Open port.</description></result><result id="01ae62aa-a184-43ea-aecc-7686a5a99ceb"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>netvenuechat (1023/tcp)</port><nvt oid="0"><name></name><cvss_base></cvss_base><risk_factor></risk_factor><cve></cve><bid></bid></nvt><threat>Log</threat><description>Open port.</description></result><result id="71a3b2c5-abf0-4ecf-b924-f4e9743ed2a3"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>nfs (2049/tcp)</port><nvt oid="0"><name></name><cvss_base></cvss_base><risk_factor></risk_factor><cve></cve><bid></bid></nvt><threat>Log</threat><description>Open port.</description></result><result id="52670cf1-d549-48d5-980a-b11dad173158"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>epmd (4369/tcp)</port><nvt oid="0"><name></name><cvss_base></cvss_base><risk_factor></risk_factor><cve></cve><bid></bid></nvt><threat>Log</threat><description>Open port.</description></result><result id="80ca6988-641d-4981-bcd8-afc1990eb7fe"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.90022"><name>SSH Authorization</name><cvss_base>0.0</cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>No port for an ssh connect was found open.
+Hence local security checks might not work.
+</description></result><result id="1a19536b-c334-4543-87d4-a73466597a5a"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>sunrpc (111/tcp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.11111"><name>rpcinfo -p</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>RPC program #100000 version 2 &apos;portmapper&apos; (portmap sunrpc rpcbind) is running on port 111
+
+</description></result><result id="affe1af3-f8de-43cb-aa97-4f695098269f"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>sunrpc (111/tcp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.11111"><name>rpcinfo -p</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>RPC program #100021 version 0 &apos;nlockmgr&apos; is running on port 1021
+RPC program #100021 version 1 &apos;nlockmgr&apos; is running on port 1021
+RPC program #100021 version 3 &apos;nlockmgr&apos; is running on port 1021
+RPC program #100021 version 4 &apos;nlockmgr&apos; is running on port 1021
+
+</description></result><result id="15a2a156-9297-44f6-ac62-9be49c023823"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>sunrpc (111/tcp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.11111"><name>rpcinfo -p</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>RPC program #100024 version 1 &apos;status&apos; is running on port 1022
+
+</description></result><result id="7df1f64f-207f-4dcf-a100-a06d7296d323"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>sunrpc (111/tcp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.11111"><name>rpcinfo -p</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>RPC program #100005 version 1 &apos;mountd&apos; (mount showmount) is running on port 1023
+RPC program #100005 version 3 &apos;mountd&apos; (mount showmount) is running on port 1023
+
+</description></result><result id="36d83b51-8423-469a-9877-85ecc8b9e44f"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>sunrpc (111/tcp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.11111"><name>rpcinfo -p</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>RPC program #100003 version 2 &apos;nfs&apos; (nfsprog) is running on port 2049
+RPC program #100003 version 3 &apos;nfs&apos; (nfsprog) is running on port 2049
+
+</description></result><result id="153cd35c-33e1-48e0-8f8e-b8eef01120b8"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>sunrpc (111/udp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.11111"><name>rpcinfo -p</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>RPC program #100000 version 2 &apos;portmapper&apos; (portmap sunrpc rpcbind) is running on port 111
+
+</description></result><result id="45004d59-0f66-4727-bf97-d6d56ad999f8"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>sunrpc (111/udp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.11111"><name>rpcinfo -p</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>RPC program #100005 version 1 &apos;mountd&apos; (mount showmount) is running on port 641
+RPC program #100005 version 3 &apos;mountd&apos; (mount showmount) is running on port 641
+
+</description></result><result id="7943bd37-2ead-414a-911a-5a81ab7fbd58"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>sunrpc (111/udp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.11111"><name>rpcinfo -p</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>RPC program #100021 version 0 &apos;nlockmgr&apos; is running on port 677
+RPC program #100021 version 1 &apos;nlockmgr&apos; is running on port 677
+RPC program #100021 version 3 &apos;nlockmgr&apos; is running on port 677
+RPC program #100021 version 4 &apos;nlockmgr&apos; is running on port 677
+
+</description></result><result id="9c6c9eb9-c62a-476e-aad4-c10cd06978df"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.102002"><name>OS fingerprinting</name><cvss_base>0.0</cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>ICMP based OS fingerprint results: (90% confidence)
+
+FreeBSD
+Apple Mac OS X
+</description></result><result id="9d1c81b4-8eab-4c17-99fd-c08522f82fa8"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>sunrpc (111/udp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.11111"><name>rpcinfo -p</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>RPC program #100011 version 1 &apos;rquotad&apos; (rquotaprog quota rquota) is running on port 705
+RPC program #100011 version 2 &apos;rquotad&apos; (rquotaprog quota rquota) is running on port 705
+
+</description></result><result id="f581227c-7ec8-4e92-ada1-8eeb2bf70b7c"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>sunrpc (111/udp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.11111"><name>rpcinfo -p</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>RPC program #100024 version 1 &apos;status&apos; is running on port 986
+
+</description></result><result id="79939412-81eb-4094-96d3-28841b8520a9"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>sunrpc (111/udp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.11111"><name>rpcinfo -p</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>RPC program #100003 version 2 &apos;nfs&apos; (nfsprog) is running on port 2049
+RPC program #100003 version 3 &apos;nfs&apos; (nfsprog) is running on port 2049
+
+</description></result><result id="805d5ac5-b963-453c-87e6-7b33f3d7fcd5"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>ntp (123/udp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.10884"><name>NTP read variables</name><cvss_base></cvss_base><risk_factor>Low</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>
+  A NTP (Network Time Protocol) server is listening on this port.
+</description></result><result id="259fba2c-94d5-4a20-a90d-acb3492c98c1"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>nfs (2049/udp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.102014"><name>NFS export</name><cvss_base>10.0</cvss_base><risk_factor>Critical</risk_factor><cve>CVE-1999-0554, CVE-1999-0548</cve><bid>NOBID</bid></nvt><threat>High</threat><description>Here is the export list of r00tmac : 
+/ 169.254.82.129
+
+CVE : CVE-1999-0554, CVE-1999-0548
+</description></result><result id="3f389ccc-b7d2-4b22-98a5-acd587db976d"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>epmd (4369/tcp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.66286"><name>Identify unknown services with nmap</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>nmap thinks unknown is running on this port
+</description></result><result id="33eb64fd-4209-4e10-9905-03b3f9b4f27b"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.900239"><name>Checks for open tcp ports</name><cvss_base>0.0</cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>Open TCP ports: 111, 2049, 4369, 1023
+</description></result><result id="bf558211-f66f-4d4a-a056-278167adfaf0"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>agentx (705/tcp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.802137"><name>Nfs-utils rpc.rquotad Service Detection</name><cvss_base>0.0</cvss_base><risk_factor>None</risk_factor><cve>CVE-1999-0625</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>
+  Overview: This script detects the running &apos;rpc.rquotad&apos; service on the host.
+
+  Vulnerability Insight:
+  The flaw is caused due to error in the &apos;rpc.rquotad&apos; service. If this service
+  is running then disable it as it may become a security threat.
+
+  Impact:
+  Successful exploitation could allow attackers to execute to gain information
+  about NFS services including user/system quotas.
+
+  Impact Level: System
+
+  Fix: No solution or patch is available as on 11th August, 2011. Information
+  regarding this issue will be updated once the solution details are available.
+
+  Workaround:
+  Modify /etc/inetd.conf to disable the rpc.rquotad service.
+
+  References:
+  http://osvdb.org/show/osvdb/9726
+  http://xforce.iss.net/xforce/xfdb/265
+  http://www.exploitsearch.net/index.php?q=CVE-1999-0625
+  http://www.iss.net/security_center/reference/vuln/rquotad.htm 
+CVE : CVE-1999-0625
+</description></result><result id="21e1b9f4-49ff-41fa-a54b-6d02875dca78"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>microsoft-ds (445/tcp)</port><nvt oid="1.3.6.1.4.1.25623.1.0.902797"><name>Microsoft SMB Signing Information Disclosure Vulnerability</name><cvss_base></cvss_base><risk_factor></risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Medium</threat><description>
+  Overview: This host is disabled SMB signing and is prone to information
+  disclosure vulnerability.
+
+  Vulnerability Insight:
+  The flaw is caused due to disabling SMB signing. Malicious users could sniff
+  network traffic, capture, and reply to SMB transactions that are not signed
+  by performing a man-in-the-middle (MITM) attack to obtain sensitive
+  information.
+
+  Impact:
+  Successful exploitation could allow remote attackers to gain sensitive
+  information.
+
+  Impact Level: System
+
+  Affected Software/OS:
+  Microsoft Windows NT Server 4.0 and prior.
+  Microsoft Windows 2K Service Pack 4 and prior
+  Microsoft Windows XP Service Pack 3 and prior
+  Microsoft Windows 2003 Service Pack 2 and prior
+
+  Fix: Run Windows Update and update the listed hotfixes or download and
+  update mentioned hotfixes in the advisory from the below link,
+  http://support.microsoft.com/kb/916846
+
+  References:
+  http://support.microsoft.com/kb/887429
+  http://support.microsoft.com/kb/916846
+  http://xforce.iss.net/xforce/xfdb/31965 
+</description></result><result id="038d8b54-40f2-489f-9777-75c67dae4050"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.103978"><name>Checks for open udp ports</name><cvss_base>0.0</cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>Open UDP ports: [None found]
+</description></result><result id="911f64c5-9c40-41ab-b1d0-0a9132d5e9be"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.103978"><name>Checks for open udp ports</name><cvss_base>0.0</cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>Open UDP ports: [None found]
+</description></result><result id="64f7490c-1648-4fa1-ae51-499db5361250"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.51662"><name>Traceroute</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>Here is the route from 10.0.1.16 to 10.0.1.23
+
+10.0.1.16
+10.0.1.23
+
+</description></result><result id="c7fa650f-18f6-46ec-b39d-4ae19198a541"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.51662"><name>Traceroute</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>Here is the route from 10.0.1.16 to 10.0.1.18
+
+10.0.1.16
+10.0.1.18
+
+</description></result><result id="e3840a27-6c82-4c59-b08e-7207ac9a7168"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>general/SMBClient</port><nvt oid="1.3.6.1.4.1.25623.1.0.90011"><name>SMB Test</name><cvss_base></cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>The tool &quot;smbclient&quot; is not available for openvasd.
+Therefore none of the tests using smbclient are executed.
+</description></result><result id="2cd48c1b-5ab5-4aa2-b30e-01f04d72e08f"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.80091"><name>TCP timestamps</name><cvss_base></cvss_base><risk_factor>Medium</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Low</threat><description>
+Synopsis :
+
+The remote service implements TCP timestamps.
+
+Description :
+
+The remote host implements TCP timestamps, as defined by RFC1323.
+A side effect of this feature is that the uptime of the remote 
+host can sometimes be computed.
+
+See also :
+
+http://www.ietf.org/rfc/rfc1323.txt
+</description></result><result id="62453b2c-1ff2-462c-a2ac-b53bff1dcf29"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>general/HOST-T</port><nvt oid="1.3.6.1.4.1.25623.1.0.810003"><name>Host Summary</name><cvss_base>0.0</cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>traceroute:10.0.1.16,10.0.1.23
+TCP ports:445,135,139
+UDP ports:
+
+</description></result><result id="289c1b51-6dbe-4002-b7ee-bb8105a825d6"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.19506"><name>Information about the scan</name><cvss_base>0.0</cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>Information about this scan : 
+
+OpenVAS version : 4.0.6
+Plugin feed version : 201203201318
+Type of plugin feed : OpenVAS NVT Feed
+Scanner IP : 10.0.1.16
+Port scanner(s) : nmap 
+Port range : default
+Thorough tests : no
+Experimental tests : no
+Paranoia level : 1
+Report Verbosity : 1
+Safe checks : yes
+Max hosts : 20
+Max checks : 4
+Scan Start Date : 2012/3/25 20:55
+Scan duration : 619 sec
+
+</description></result><result id="4e79ac37-52f1-447b-b728-e8be2107b4cd"><subnet>10.0.1.23</subnet><host>10.0.1.23</host><port>general/CPE-T</port><nvt oid="1.3.6.1.4.1.25623.1.0.810002"><name>CPE Inventory</name><cvss_base>0.0</cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>10.0.1.23|cpe:/o:microsoft:windows
+
+</description></result><result id="d8f086aa-beae-42ff-b488-42455d145191"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>general/HOST-T</port><nvt oid="1.3.6.1.4.1.25623.1.0.810003"><name>Host Summary</name><cvss_base>0.0</cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>traceroute:10.0.1.16,10.0.1.18
+TCP ports:111,2049,4369,1023
+UDP ports:
+
+</description></result><result id="fcad9343-748e-4179-9b39-899fdeff5dc5"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>general/tcp</port><nvt oid="1.3.6.1.4.1.25623.1.0.19506"><name>Information about the scan</name><cvss_base>0.0</cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>Information about this scan : 
+
+OpenVAS version : 4.0.6
+Plugin feed version : 201203201318
+Type of plugin feed : OpenVAS NVT Feed
+Scanner IP : 10.0.1.16
+Port scanner(s) : nmap 
+Port range : default
+Thorough tests : no
+Experimental tests : no
+Paranoia level : 1
+Report Verbosity : 1
+Safe checks : yes
+Max hosts : 20
+Max checks : 4
+Scan Start Date : 2012/3/25 20:55
+Scan duration : 625 sec
+
+</description></result><result id="c1f19f90-da64-4ede-8ab6-4f8b365338b0"><subnet>10.0.1.18</subnet><host>10.0.1.18</host><port>general/CPE-T</port><nvt oid="1.3.6.1.4.1.25623.1.0.810002"><name>CPE Inventory</name><cvss_base>0.0</cvss_base><risk_factor>None</risk_factor><cve>NOCVE</cve><bid>NOBID</bid></nvt><threat>Log</threat><description>10.0.1.18|cpe:/o:apple:mac_os_x
+
+</description></result></results><host_start>Sun Mar 25 20:55:43 2012<host>10.0.1.18</host></host_start><host_start>Sun Mar 25 20:55:44 2012<host>10.0.1.23</host></host_start><host_end>Sun Mar 25 21:06:19 2012<host>10.0.1.18</host></host_end><host_end>Sun Mar 25 21:06:14 2012<host>10.0.1.23</host></host_end><scan_end>Sun Mar 25 21:06:19 2012</scan_end></report></report>

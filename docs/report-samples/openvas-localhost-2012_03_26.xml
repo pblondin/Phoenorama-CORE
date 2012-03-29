@@ -1,0 +1,911 @@
+<report extension="xml" id="a2d5960d-2588-4891-ad00-562104cfa813" content_type="text/xml" format_id="d5da9f67-8551-4e51-807b-b6a873d70e34">
+  <report id="a2d5960d-2588-4891-ad00-562104cfa813">
+    <report_format/>
+    <sort>
+      <field>ROWID<order>ascending</order></field>
+    </sort>
+    <filters>hmlgd<phrase/><notes>0</notes><overrides>0</overrides><apply_overrides>0</apply_overrides><result_hosts_only>0</result_hosts_only><min_cvss_base/><filter>High</filter><filter>Medium</filter><filter>Low</filter><filter>Log</filter><filter>Debug</filter></filters>
+    <scan_run_status>Done</scan_run_status>
+    <task id="2a480f7b-3992-4852-8748-ee6b10653ac1">
+      <name>850494b1-0629-494c-bd03-5400b1e630e9</name>
+    </task>
+    <scan_start>Mon Mar 26 17:02:19 2012</scan_start>
+    <ports start="0" max="-1">
+      <port>otp (9390/tcp)<host>127.0.0.1</host><threat>Log</threat></port>
+       <port>test1234<host>test</host><threat>Log</threat></port>
+      <port>general/HOST-T<host>127.0.0.1</host><threat>Log</threat></port>
+      <port>general/CPE-T<host>127.0.0.1</host><threat>Log</threat></port>
+      <port>epmd (4369/tcp)<host>127.0.0.1</host><threat>Log</threat></port>
+      <port>ssh (22/tcp)<host>127.0.0.1</host><threat>Low</threat></port>
+      <port>general/tcp<host>127.0.0.1</host><threat>Low</threat></port>
+      <port>http (80/tcp)<host>127.0.0.1</host><threat>Medium</threat></port>
+      <port>submission (587/tcp)<host>127.0.0.1</host><threat>High</threat></port>
+      <port>smtp (25/tcp)<host>127.0.0.1</host><threat>High</threat></port>
+    </ports>
+    <result_count>41<full>41</full><filtered>41</filtered><debug><full>0</full><filtered>0</filtered></debug><hole><full>3</full><filtered>3</filtered></hole><info><full>12</full><filtered>12</filtered></info><log><full>21</full><filtered>21</filtered></log><warning><full>5</full><filtered>5</filtered></warning><false_positive><full>0</full><filtered>0</filtered></false_positive></result_count>
+    <results start="0" max="-1">
+      <result id="4a0e603e-14be-4109-a1d2-bf29ed9c414d">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>ssh (22/tcp)</port>
+        <nvt oid="0">
+          <name/>
+          <cvss_base/>
+          <risk_factor/>
+          <cve/>
+          <bid/>
+        </nvt>
+        <threat>Log</threat>
+        <description>Open port.</description>
+      </result>
+      <result id="ba69f3e9-4668-465a-a320-55e38a350c3e">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>smtp (25/tcp)</port>
+        <nvt oid="0">
+          <name/>
+          <cvss_base/>
+          <risk_factor/>
+          <cve/>
+          <bid/>
+        </nvt>
+        <threat>Log</threat>
+        <description>Open port.</description>
+      </result>
+      <result id="d588f21a-1873-441a-a39c-86d7989e1169">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>http (80/tcp)</port>
+        <nvt oid="0">
+          <name/>
+          <cvss_base/>
+          <risk_factor/>
+          <cve/>
+          <bid/>
+        </nvt>
+        <threat>Log</threat>
+        <description>Open port.</description>
+      </result>
+      <result id="6fc879ac-3755-480a-85c1-2413f6689fe1">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>submission (587/tcp)</port>
+        <nvt oid="0">
+          <name/>
+          <cvss_base/>
+          <risk_factor/>
+          <cve/>
+          <bid/>
+        </nvt>
+        <threat>Log</threat>
+        <description>Open port.</description>
+      </result>
+      <result id="6e4b5141-e3c7-43f7-9c27-e2fbfd23dca1">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>epmd (4369/tcp)</port>
+        <nvt oid="0">
+          <name/>
+          <cvss_base/>
+          <risk_factor/>
+          <cve/>
+          <bid/>
+        </nvt>
+        <threat>Log</threat>
+        <description>Open port.</description>
+      </result>
+      <result id="8090360d-4f41-4cb8-8a4b-ae1cbc6cf25e">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>otp (9390/tcp)</port>
+        <nvt oid="0">
+          <name/>
+          <cvss_base/>
+          <risk_factor/>
+          <cve/>
+          <bid/>
+        </nvt>
+        <threat>Log</threat>
+        <description>Open port.</description>
+      </result>
+      <result id="a84e6dac-d459-49af-a573-0bc9a63e5dc4">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>http (80/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.10330">
+          <name>Services</name>
+          <cvss_base/>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Low</threat>
+        <description>A web server is running on this port
+</description>
+      </result>
+      <result id="ea8916c9-777b-430c-ae1d-39eeaeb31836">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>submission (587/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.10330">
+          <name>Services</name>
+          <cvss_base/>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Low</threat>
+        <description>An SMTP server is running on this port
+Here is its banner : 
+220 LISA ESMTP Sendmail 8.14.3/8.14.3/Debian-9.4; Mon, 26 Mar 2012 17:02:23 -0400; (No UCE/UBE) logging access from: localhost(OK)-localhost [127.0.0.1]
+</description>
+      </result>
+      <result id="4cd2cab9-b22f-4c4d-bf8f-3e754b3461f8">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>smtp (25/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.10330">
+          <name>Services</name>
+          <cvss_base/>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Low</threat>
+        <description>An SMTP server is running on this port
+Here is its banner : 
+220 LISA ESMTP Sendmail 8.14.3/8.14.3/Debian-9.4; Mon, 26 Mar 2012 17:02:23 -0400; (No UCE/UBE) logging access from: localhost(OK)-localhost [127.0.0.1]
+</description>
+      </result>
+      <result id="db4631fa-4bd3-432c-adaf-da2f8ff19cc9">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>ssh (22/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.10330">
+          <name>Services</name>
+          <cvss_base/>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Low</threat>
+        <description>An ssh server is running on this port
+</description>
+      </result>
+      <result id="dee59238-2dca-49cd-8ba6-18611e42be3d">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>ssh (22/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.90022">
+          <name>SSH Authorization</name>
+          <cvss_base>0.0</cvss_base>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Log</threat>
+        <description>No SSH credentials were supplied.
+Hence local security checks are not enabled.
+</description>
+      </result>
+      <result id="7b9d6e23-d70b-49b5-89b5-48c8cff6ae19">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>http (80/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.10107">
+          <name>HTTP Server type and version</name>
+          <cvss_base/>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Low</threat>
+        <description>The remote web server type is :
+
+Apache/2.2.16 (Debian)
+
+
+Solution : You can set the directive 'ServerTokens Prod' to limit
+the information emanating from the server in its response headers.
+</description>
+      </result>
+      <result id="b82e0afd-b866-4545-8c74-22c33c334a5c">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>general/tcp</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.102002">
+          <name>OS fingerprinting</name>
+          <cvss_base>0.0</cvss_base>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Log</threat>
+        <description>ICMP based OS fingerprint results: (92% confidence)
+
+Linux Kernel
+</description>
+      </result>
+      <result id="a6082ec4-694e-4e81-96c2-1d22072caf56">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>submission (587/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.10263">
+          <name>SMTP Server type and version</name>
+          <cvss_base/>
+          <risk_factor>Low</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Low</threat>
+        <description>Remote SMTP server banner :
+220 LISA ESMTP Sendmail 8.14.3/8.14.3/Debian-9.4; Mon, 26 Mar 2012 17:02:27 -0400; (No UCE/UBE) logging access from: localhost(OK)-localhost [127.0.0.1]
+
+
+
+This is probably: Sendmail version 8.14.3
+
+</description>
+      </result>
+      <result id="1ccf00f7-9864-4e7c-bc71-5f3e9267193c">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>smtp (25/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.10263">
+          <name>SMTP Server type and version</name>
+          <cvss_base/>
+          <risk_factor>Low</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Low</threat>
+        <description>Remote SMTP server banner :
+220 LISA ESMTP Sendmail 8.14.3/8.14.3/Debian-9.4; Mon, 26 Mar 2012 17:02:27 -0400; (No UCE/UBE) logging access from: localhost(OK)-localhost [127.0.0.1]
+
+
+
+This is probably: Sendmail version 8.14.3
+
+</description>
+      </result>
+      <result id="080ffb50-5149-4c69-b153-6f3265fd1a0b">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>general/tcp</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.900498">
+          <name>Apache Web ServerVersion Detection</name>
+          <cvss_base/>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Low</threat>
+        <description>Apache Web Server version 2.2.16 was detected on the host
+</description>
+      </result>
+      <result id="8567ed4e-88a7-46b0-b04e-78d3365c83ee">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>http (80/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.11032">
+          <name>Directory Scanner</name>
+          <cvss_base/>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Low</threat>
+        <description>The following directories were discovered:
+/cgi-bin, /doc, /icons, /manual, /server-status
+
+While this is not, in and of itself, a bug, you should manually inspect 
+these directories to ensure that they are in compliance with company
+security standards
+
+Other references : OWASP:OWASP-CM-006
+</description>
+      </result>
+      <result id="07625bb9-e275-4acd-82e2-67235a40789c">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>ssh (22/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.10267">
+          <name>SSH Server type and version</name>
+          <cvss_base>0.0</cvss_base>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Log</threat>
+        <description>Detected SSH server version: SSH-2.0-OpenSSH_5.5p1 Debian-6+squeeze1
+Remote SSH supported authentication: publickey,password
+Remote SSH banner: 
+(not available)
+
+CPE: cpe:/a:openbsd:openssh:5.5p1
+
+Concluded from remote connection attempt with credentials:
+  Login: OpenVAS
+  Password: OpenVAS
+
+</description>
+      </result>
+      <result id="7c7ca4cc-addd-488a-b968-c2804209cb2f">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>general/tcp</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.800608">
+          <name>Sendmail Version Detection</name>
+          <cvss_base/>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Low</threat>
+        <description>Sendmail version 8.14.3 was detected on the host
+</description>
+      </result>
+      <result id="110feeef-c660-4497-8cd3-ef9523fe78d8">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>ssh (22/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.100259">
+          <name>SSH Protocol Versions Supported</name>
+          <cvss_base>0.0</cvss_base>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Log</threat>
+        <description>The remote SSH Server supports the following SSH Protocol Versions:
+1.99
+2.0
+
+</description>
+      </result>
+      <result id="7920832a-0ff6-48ec-a419-831bb110a68b">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>general/tcp</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.800608">
+          <name>Sendmail Version Detection</name>
+          <cvss_base/>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Low</threat>
+        <description>Sendmail version 8.14.3 was detected on the host
+</description>
+      </result>
+      <result id="e7fd8b88-eee6-45d8-8ae6-b942a8afdf89">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>general/tcp</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.103978">
+          <name>Checks for open udp ports</name>
+          <cvss_base>0.0</cvss_base>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Log</threat>
+        <description>Open UDP ports: [None found]
+</description>
+      </result>
+      <result id="50e822d6-0cd5-4629-8a90-9486ddd3fc28">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>http (80/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.103122">
+          <name>Apache Web Server ETag Header Information Disclosure Weakness</name>
+          <cvss_base>4.3</cvss_base>
+          <risk_factor>Medium</risk_factor>
+          <cve>CVE-2003-1418</cve>
+          <bid>6939</bid>
+        </nvt>
+        <threat>Medium</threat>
+        <description>Overview:
+A weakness has been discovered in Apache web servers that are
+configured to use the FileETag directive. Due to the way in which
+Apache generates ETag response headers, it may be possible for an
+attacker to obtain sensitive information regarding server files.
+Specifically, ETag header fields returned to a client contain the
+file's inode number.
+
+Exploitation of this issue may provide an attacker with information
+that may be used to launch further attacks against a target network.
+
+OpenBSD has released a patch that addresses this issue. Inode numbers
+returned from the server are now encoded using a private hash to avoid
+the release of sensitive information.
+
+Solution:
+OpenBSD has released a patch to address this issue.
+
+Novell has released TID10090670 to advise users to apply the available
+workaround of disabling the directive in the configuration file for
+Apache releases on NetWare. Please see the attached Technical
+Information Document for further details.
+
+References:
+https://www.securityfocus.com/bid/6939
+http://httpd.apache.org/docs/mod/core.html#fileetag
+http://www.openbsd.org/errata32.html
+http://support.novell.com/docs/Tids/Solutions/10090670.html
+
+Information that was gathered:
+Inode: 79567962
+Size: 177
+
+CVE : CVE-2003-1418
+BID : 6939
+</description>
+      </result>
+      <result id="ff5c9c13-cc5a-414a-8da6-cd77863b8844">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>http (80/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.10677">
+          <name>Apache /server-status accessible</name>
+          <cvss_base/>
+          <risk_factor>Low</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Medium</threat>
+        <description>
+Requesting the URI /server-status gives information about
+the currently running Apache.
+
+Solution : 
+If you don't use this feature, comment the appropriate section in
+your httpd.conf file. If you really need it, limit its access to
+the administrator's machine.
+</description>
+      </result>
+      <result id="4c743a7f-63d4-450e-8ac6-1e148c5884f2">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>submission (587/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.100072">
+          <name>Check if Mailserver answer to VRFY and EXPN requests</name>
+          <cvss_base/>
+          <risk_factor>Medium</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Medium</threat>
+        <description>
+
+ Overview:
+  The Mailserver on this host answers to VRFY and/or EXPN requests.
+  VRFY and EXPN ask the server for information about an address. They are
+  inherently unusable through firewalls, gateways, mail exchangers for part-time
+  hosts, etc. OpenVAS suggests that, if you really want to publish this type of
+  information, you use a mechanism that legitimate users actually know about,
+  such as Finger or HTTP. 
+
+ Solution:
+  Disable VRFY and/or EXPN on your Mailserver. 
+  For postfix add 'disable_vrfy_command=yes' in 'main.cf'. 
+  For Sendmail add the option 'O PrivacyOptions=goaway'.
+
+ See also:
+  http://cr.yp.to/smtp/vrfy.html
+
+Details:
+
+'VRFY root' produces the following answer: 250 2.1.5 root &lt;root@LISA&gt;
+
+'EXPN root' produces the following answer: 250 2.1.5 root &lt;root@LISA&gt;
+
+
+</description>
+      </result>
+      <result id="4cb35789-2599-4085-9406-fed630ee3acf">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>smtp (25/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.100072">
+          <name>Check if Mailserver answer to VRFY and EXPN requests</name>
+          <cvss_base/>
+          <risk_factor>Medium</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Medium</threat>
+        <description>
+
+ Overview:
+  The Mailserver on this host answers to VRFY and/or EXPN requests.
+  VRFY and EXPN ask the server for information about an address. They are
+  inherently unusable through firewalls, gateways, mail exchangers for part-time
+  hosts, etc. OpenVAS suggests that, if you really want to publish this type of
+  information, you use a mechanism that legitimate users actually know about,
+  such as Finger or HTTP. 
+
+ Solution:
+  Disable VRFY and/or EXPN on your Mailserver. 
+  For postfix add 'disable_vrfy_command=yes' in 'main.cf'. 
+  For Sendmail add the option 'O PrivacyOptions=goaway'.
+
+ See also:
+  http://cr.yp.to/smtp/vrfy.html
+
+Details:
+
+'VRFY root' produces the following answer: 250 2.1.5 root &lt;root@LISA&gt;
+
+'EXPN root' produces the following answer: 250 2.1.5 root &lt;root@LISA&gt;
+
+
+</description>
+      </result>
+      <result id="40bcf737-59cc-46c5-b9f2-132333568148">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>general/tcp</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.103079">
+          <name>DIRB (NASL wrapper)</name>
+          <cvss_base/>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Log</threat>
+        <description>DIRB could not be found in your system path.
+OpenVAS was unable to execute DIRB and to perform the scan you
+requested.
+Please make sure that DIRB is installed and is
+available in the PATH variable defined for your environment.
+</description>
+      </result>
+      <result id="3a8049ec-1c6c-4dcb-9f80-dc89e1b0faba">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>general/tcp</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.900239">
+          <name>Checks for open tcp ports</name>
+          <cvss_base>0.0</cvss_base>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Log</threat>
+        <description>Open TCP ports: 22, 9390, 25, 4369, 587, 80
+</description>
+      </result>
+      <result id="927c72eb-2faf-415d-b35e-e6a034987dca">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>general/tcp</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.110001">
+          <name>arachni (NASL wrapper)</name>
+          <cvss_base/>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Log</threat>
+        <description>Arachni could not be found in your system path.
+OpenVAS was unable to execute Arachni and to perform the scan you
+requested.
+Please make sure that Arachni is installed and that arachni is
+available in the PATH variable defined for your environment.
+</description>
+      </result>
+      <result id="550b0af1-d37f-4796-b10f-2e5c3a5b6785">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>epmd (4369/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.66286">
+          <name>Identify unknown services with nmap</name>
+          <cvss_base/>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Log</threat>
+        <description>nmap thinks unknown is running on this port
+</description>
+      </result>
+      <result id="8b19a628-25b0-4c5b-b0c0-d6c2e7d0a296">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>general/tcp</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.14260">
+          <name>Nikto (NASL wrapper)</name>
+          <cvss_base>0.0</cvss_base>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Log</threat>
+        <description>Nikto could not be found in your system path.
+OpenVAS was unable to execute Nikto and to perform the scan you
+requested.
+Please make sure that Nikto is installed and that nikto.pl or nikto is
+available in the PATH variable defined for your environment.
+</description>
+      </result>
+      <result id="5d64d505-1c8b-43d7-a5c1-10f58ef5c4b0">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>general/tcp</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.51662">
+          <name>Traceroute</name>
+          <cvss_base/>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Low</threat>
+        <description>Here is the route from 127.0.0.1 to 127.0.0.1
+
+127.0.0.1
+
+</description>
+      </result>
+      <result id="6684a479-4b01-456b-93de-e3352b1b998e">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>http (80/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.80110">
+          <name>wapiti (NASL wrapper)</name>
+          <cvss_base/>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Log</threat>
+        <description>wapiti could not be found in your system path.
+OpenVAS was unable to execute wapiti and to perform the scan you
+requested.
+Please make sure that wapiti is installed and that wapiti is
+available in the PATH variable defined for your environment.
+</description>
+      </result>
+      <result id="e233c39a-8ba6-47b8-b708-41ca5cc15d27">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>otp (9390/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.103441">
+          <name>Check for supported SSL Ciphers</name>
+          <cvss_base/>
+          <risk_factor/>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Log</threat>
+        <description>Server will not supports SSLv2 Ciphers.
+
+Server will not supports SSLv3 Ciphers.
+
+Server will not supports TLSv1 Ciphers.
+
+None of the weak ciphers are supported
+</description>
+      </result>
+      <result id="d536cf9e-4559-4855-8faa-cd88136f6a62">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>http (80/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.10056">
+          <name>/doc directory browsable ?</name>
+          <cvss_base>5.0</cvss_base>
+          <risk_factor>Medium</risk_factor>
+          <cve>CVE-1999-0678</cve>
+          <bid>318</bid>
+        </nvt>
+        <threat>Medium</threat>
+        <description>The /doc directory is browsable.
+/doc shows the content of the /usr/doc directory and therefore it shows which programs and - important! - the version of the installed programs.
+
+Solution : Use access restrictions for the /doc directory.
+If you use Apache you might use this in your access.conf:
+
+ &lt;Directory /usr/doc&gt;
+ AllowOverride None
+ order deny,allow
+ deny from all
+ allow from localhost
+ &lt;/Directory&gt;
+CVE : CVE-1999-0678
+BID : 318
+</description>
+      </result>
+      <result id="8f39d8e6-d0ad-4fef-b504-d2722a4c3c41">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>submission (587/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.100415">
+          <name>Sendmail NULL Character CA SSL Certificate Validation Security Bypass Vulnerability</name>
+          <cvss_base>7.5</cvss_base>
+          <risk_factor>High</risk_factor>
+          <cve>CVE-2009-4565</cve>
+          <bid>37543</bid>
+        </nvt>
+        <threat>High</threat>
+        <description>Overview:
+Sendmail is prone to a security-bypass vulnerability because the
+application fails to properly validate the domain name in a signed CA
+certificate, allowing attackers to substitute malicious SSL
+certificates for trusted ones.
+
+Successfully exploiting this issue allows attackers to perform man-in-the-
+middle attacks or impersonate trusted servers, which will aid in
+further attacks.
+
+Versions prior to Sendmail 8.14.4 are vulnerable.
+
+Solution:
+Updates are available. Please see the references for more information.
+
+References:
+http://www.securityfocus.com/bid/37543
+http://www.sendmail.org/releases/8.14.4
+http://www.sendmail.org/
+CVE : CVE-2009-4565
+BID : 37543
+</description>
+      </result>
+      <result id="a2f1e121-3ce9-46f5-a697-2a1956928858">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>smtp (25/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.100415">
+          <name>Sendmail NULL Character CA SSL Certificate Validation Security Bypass Vulnerability</name>
+          <cvss_base>7.5</cvss_base>
+          <risk_factor>High</risk_factor>
+          <cve>CVE-2009-4565</cve>
+          <bid>37543</bid>
+        </nvt>
+        <threat>High</threat>
+        <description>Overview:
+Sendmail is prone to a security-bypass vulnerability because the
+application fails to properly validate the domain name in a signed CA
+certificate, allowing attackers to substitute malicious SSL
+certificates for trusted ones.
+
+Successfully exploiting this issue allows attackers to perform man-in-the-
+middle attacks or impersonate trusted servers, which will aid in
+further attacks.
+
+Versions prior to Sendmail 8.14.4 are vulnerable.
+
+Solution:
+Updates are available. Please see the references for more information.
+
+References:
+http://www.securityfocus.com/bid/37543
+http://www.sendmail.org/releases/8.14.4
+http://www.sendmail.org/
+CVE : CVE-2009-4565
+BID : 37543
+</description>
+      </result>
+      <result id="60e5ad30-b02b-4fe5-b4db-84a18d3bb39e">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>smtp (25/tcp)</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.802194">
+          <name>SendMail Mail Relay Vulnerability</name>
+          <cvss_base>7.5</cvss_base>
+          <risk_factor>High</risk_factor>
+          <cve>CVE-2002-1278, CVE-2003-0285</cve>
+          <bid>6118, 7580</bid>
+        </nvt>
+        <threat>High</threat>
+        <description>
+  Overview:
+  This host is installed with SendMail and is prone to mail relay
+  vulnerability.
+
+  Vulnerability Insight:
+  The flaw is caused due to an error in the mailconf module in Linuxconf which
+  generates the Sendmail configuration file (sendmail.cf) and configures
+  Sendmail to run as an open mail relay, which allows remote attackers to send
+  Spam email.
+
+  Impact:
+  Successful exploitation will let the attackers to send email messages outside
+  of the served network. This could result in unauthorized messages being sent
+  from the vulnerable server.
+
+  Impact Level: Application/System
+
+  Affected Software/OS:
+  Linuxconf versions 1.24 r2, 1.2.5 r3
+  Linuxconf versions 1.24 r2, 1.2.5 r3 on Conectiva Linux 6.0 through 8
+  IBM AIX versions 4.3, 4.3.1, 4.3.2, 4.3.3, 5.1, 5.1 L, 5.2
+
+  Fix: Upgrade to the latest version of Linuxconf version 1.29r1 or later
+  For updates refer, http://www.solucorp.qc.ca/linuxconf/
+
+  For IBM AIX, apply the patch from below link
+  ftp://aix.software.ibm.com/aix/efixes/security/sendmail_3_mod.tar.Z
+
+  References:
+  http://osvdb.org/6066
+  http://xforce.iss.net/xforce/xfdb/10554
+  http://www.securityfocus.com/bid/6118/solution 
+CVE : CVE-2002-1278, CVE-2003-0285
+BID : 6118, 7580
+</description>
+      </result>
+      <result id="7bd6c364-44c3-43bc-99bb-79c968f7030f">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>general/CPE-T</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.810002">
+          <name>CPE Inventory</name>
+          <cvss_base>0.0</cvss_base>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Log</threat>
+        <description>127.0.0.1|cpe:/a:apache:http_server:2.2.16
+127.0.0.1|cpe:/a:sendmail:sendmail:8.14.3
+127.0.0.1|cpe:/a:openbsd:openssh:5.5p1
+127.0.0.1|cpe:/o:debian:debian_linux
+
+</description>
+      </result>
+      <result id="7167dbfb-fdb1-4ad1-a950-98d89d91b54e">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>general/tcp</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.19506">
+          <name>Information about the scan</name>
+          <cvss_base>0.0</cvss_base>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Log</threat>
+        <description>Information about this scan : 
+
+OpenVAS version : 4.0.6
+Plugin feed version : 201203261201
+Type of plugin feed : OpenVAS NVT Feed
+Scanner IP : 127.0.0.1
+Port scanner(s) : nmap 
+Port range : default
+Thorough tests : no
+Experimental tests : no
+Paranoia level : 1
+Report Verbosity : 1
+Safe checks : yes
+Max hosts : 20
+Max checks : 4
+Scan Start Date : 2012/3/26 17:02
+Scan duration : 505 sec
+
+</description>
+      </result>
+      <result id="89f50251-bb49-4a2b-9f19-63dd8b7c39cb">
+        <subnet>127.0.0.1</subnet>
+        <host>127.0.0.1</host>
+        <port>general/HOST-T</port>
+        <nvt oid="1.3.6.1.4.1.25623.1.0.810003">
+          <name>Host Summary</name>
+          <cvss_base>0.0</cvss_base>
+          <risk_factor>None</risk_factor>
+          <cve>NOCVE</cve>
+          <bid>NOBID</bid>
+        </nvt>
+        <threat>Log</threat>
+        <description>traceroute:127.0.0.1
+TCP ports:22,9390,25,4369,587,80
+UDP ports:
+
+</description>
+      </result>
+    </results>
+    <host_start>Mon Mar 26 17:02:19 2012<host>127.0.0.1</host></host_start>
+    <host_end>Mon Mar 26 17:10:47 2012<host>127.0.0.1</host></host_end>
+    <scan_end>Mon Mar 26 17:10:47 2012</scan_end>
+  </report>
+</report>
