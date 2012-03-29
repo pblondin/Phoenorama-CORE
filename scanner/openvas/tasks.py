@@ -21,7 +21,7 @@
 #
 #######
 from StringIO import StringIO
-
+from pymongo import Connection
 
 '''
 Created on Mar 22, 2012
@@ -63,9 +63,12 @@ def run(target, **kwargs):
 def getStatus(taskUuid):
     pass
     
-@task(name="openvas.getReport")
-def getReport(reportUuid):
-    logger = getReport.get_logger()
+@task(name="openvas.saveReport")
+def saveReport(reportUuid):
+    logger = saveReport.get_logger()
+
+    connection = Connection()
+    db = connection.phoenorama
 
     getReport_task = "--get-report %s" % (reportUuid)
     cmd = shlex.split(TOOL_PATH + getReport_task)
@@ -78,7 +81,9 @@ def getReport(reportUuid):
     report.open_ports, report.vulnerabilities = parseXML(StringIO(report_xml))
     logger.info(report.printFullReport())
     
-    return "Report was successfully generated"
+    openvasReport = db.openvasReport
+    openvasReport.insert(report)
+    return "Report was successfully generated and saved to DB"
     
 @task(name="openvas.cleanup")
 def cleanup():
