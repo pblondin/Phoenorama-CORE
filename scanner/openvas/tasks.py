@@ -66,20 +66,19 @@ def getStatus(taskUuid):
 @task(name="openvas.getReport")
 def getReport(reportUuid):
     logger = getReport.get_logger()
-    
-    report_xml = str(uuid.uuid4()) + ".xml"
-    
-    getReport_task = "--get-report %s > %s" % (reportUuid, report_xml)
+
+    getReport_task = "--get-report %s" % (reportUuid)
     cmd = shlex.split(TOOL_PATH + getReport_task)
-    report_xml = StringIO(subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0])
+    report_xml = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]    
+    #@TODO: check if output result is valid
     
     logger.info("Retvalue: %s" % report_xml)
-    
-    #logger.info("Report successfully generated: %s" % report_xml)
-    
+  
     report = Report()
-    report.open_ports, report.vulnerabilities = parseXML(file(report_xml, 'r'))
+    report.open_ports, report.vulnerabilities = parseXML(StringIO(report_xml))
     logger.info(report.printFullReport())
+    
+    return "Report was successfully generated"
     
 @task(name="openvas.cleanup")
 def cleanup():
