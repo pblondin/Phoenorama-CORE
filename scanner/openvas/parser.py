@@ -30,15 +30,16 @@ Created on Mar 27, 2012
 from lxml import etree
 
 class Report():
-    def __init__(self):
-        self.open_ports = {}         # using host as key
-        self.vulnerabilities = {}    # using host as key
-    
+    def __init__(self, reportUuid=''):
+        self.reportUuid = reportUuid
+        self.open_ports_by_host = {}         # using host as key
+        self.vulnerabilities_by_host = {}    # using host as key
+        
     def getHosts(self):
-        return set(self.open_ports.keys() + self.vulnerabilities.keys())
+        return set(self.open_ports_by_host.keys() + self.vulnerabilities_by_host.keys())
     
     def getHighestThreat(self, host):
-        threats = [vuln.risk['threat'] for vuln in self.vulnerabilities[host]]
+        threats = [vuln['threat'] for vuln in self.vulnerabilities_by_host[host]]
         
         if 'High' in threats: return 'High'
         elif 'Medium' in threats: return 'Medium'
@@ -51,32 +52,32 @@ class Report():
         for host in self.getHosts():
             buf += "Host: " + host + "\n"
             buf += "\tThreat: " + self.getHighestThreat(host) + "\n"
-            buf += "\tNumber of open ports: " + str(len(self.open_ports[host])) + "\n"
-            buf += "\tNumber of vulnerabilities: " + str(len(self.vulnerabilities[host])) + "\n"
+            buf += "\tNumber of open ports: " + str(len(self.open_ports_by_host[host])) + "\n"
+            buf += "\tNumber of vulnerabilities: " + str(len(self.vulnerabilities_by_host[host])) + "\n"
         return buf
         
     def printHostResult(self, host):
         buf = "Host: " + host + "\n"
         buf += "Highest threat: " + self.getHighestThreat(host) + "\n"
         buf += "List of open ports: \n"
-        for port in self.open_ports[host]:
+        for port in self.open_ports_by_host[host]:
             buf += "\t" + port + "\n"
         buf += "\nList of vulnerabilities: \n"
-        for vuln in self.vulnerabilities[host]:
-            buf += "\tName: " + vuln.name + "\n"
-            buf += "\tService: " + vuln.service + "\n"
-            buf += "\tDescription: " + vuln.description + "\n"
-            buf += "\tThreat: " + vuln.risk['threat'] + "\n"
-            if vuln.risk['risk_factor']:
-                buf += "\tRisk factor: " + vuln.risk['risk_factor'] + "\n"
-            if vuln.risk['cvss']:
-                buf += "\tCVSS: " + vuln.risk['cvss'] + "\n"
-            if vuln.references['nvtid']:
-                buf += "\tNVTID: " + vuln.references['nvtid'] + "\n"
-            if vuln.references['cve']:
-                buf += "\tCVE: " + vuln.references['cve'] + "\n"
-            if vuln.references['bid']:
-                buf += "\tBID: " + vuln.references['bid'] + "\n"
+        for vuln in self.vulnerabilities_by_host[host]:
+            buf += "\tName: " + vuln['name'] + "\n"
+            buf += "\tService: " + vuln['service'] + "\n"
+            buf += "\tDescription: " + vuln['description'] + "\n"
+            buf += "\tThreat: " + vuln['threat'] + "\n"
+            if vuln['risk_factor']:
+                buf += "\tRisk factor: " + vuln['risk_factor'] + "\n"
+            if vuln['cvss']:
+                buf += "\tCVSS: " + vuln['cvss'] + "\n"
+            if vuln['nvtid']:
+                buf += "\tNVTID: " + vuln['nvtid'] + "\n"
+            if vuln['cve']:
+                buf += "\tCVE: " + vuln['cve'] + "\n"
+            if vuln['bid']:
+                buf += "\tBID: " + vuln['bid'] + "\n"
             buf += "\n"        
         return buf
     
@@ -92,20 +93,22 @@ class Report():
     
     def __str__(self):
         return self.printSummary()
-
-class Vulnerability():
-    def __init__(self):
-        self.name = ''
-        self.service = ''
-        self.description = ''
-        self.references = {'nvtid': '', 'cve': [], 'bid': []}
-        self.risk = {'risk_factor': '', 'cvss': '', 'threat': ''}
     
-    def __str__(self):
-        return ""
+    
+    def toJSON(self):
+        jsonReport = {'report_uuid': self.reportUuid, 
+                      'open_ports': [{}], 
+                      'vulnerabilities': [{}]
+                      }
+        for host in self.getHosts():
+            jsonReport['open_ports'].append({'host': host, 'ports': self.open_ports_by_host[host] })
+            jsonReport['vulnerabilities'].append({'host': host, 'vulnerabilities': self.vulnerabilities_by_host[host]})
+        return jsonReport
+                                
 
 def parseXML(document):
     root = etree.parse(document)
+    report = Report(root.xpath('/report/@id')[0])
     
     vulnerabilities = {}
     # iterate over vulnerabilities
@@ -114,25 +117,24 @@ def parseXML(document):
         if not vulnerabilities.has_key(host):
             vulnerabilities[host] = []
             
-        vuln = Vulnerability()
+        vuln = {}
         
         # Summary
-        vuln.description = result.xpath('description')[0].text.strip()
-        vuln.name = result.xpath('nvt/name')[0].text
-        vuln.host = result.xpath('host')[0].text
-        vuln.service = result.xpath('port')[0].text
+        vuln['description'] = result.xpath('description')[0].text.strip()
+        vuln['name'] = result.xpath('nvt/name')[0].text
+        vuln['service'] = result.xpath('port')[0].text
         
         # Risk
-        vuln.risk['risk_factor'] = result.xpath('nvt/risk_factor')[0].text
-        vuln.risk['cvss'] = result.xpath('nvt/cvss_base')[0].text
-        vuln.risk['threat'] = result.xpath('threat')[0].text
+        vuln['risk_factor'] = result.xpath('nvt/risk_factor')[0].text
+        vuln['cvss'] = result.xpath('nvt/cvss_base')[0].text
+        vuln['threat'] = result.xpath('threat')[0].text
         
         # References
-        vuln.references['nvtid'] = result.xpath('nvt/@oid')[0] #oid attribute
+        vuln['nvtid'] = result.xpath('nvt/@oid')[0] #oid attribute
         cve = result.xpath('nvt/cve')[0].text
-        vuln.references['cve'] = cve if cve != 'NOCVE' else None
+        vuln['cve'] = cve if cve != 'NOCVE' else None
         bid = result.xpath('nvt/bid')[0].text
-        vuln.references['bid'] = bid if bid != 'NOBID' else None
+        vuln['bid'] = bid if bid != 'NOBID' else None
         
         # add vuln to vulnerabilities dictionary
         vulnerabilities[host].append(vuln)
@@ -146,7 +148,10 @@ def parseXML(document):
         
         # open port to open ports dictionary
         openPorts[host].append(port.text)
-    return openPorts, __cleanupVulnerabilities(vulnerabilities)
+        
+    report.open_ports_by_host = openPorts
+    report.vulnerabilities_by_host = __cleanupVulnerabilities(vulnerabilities)
+    return report
 
 def __cleanupVulnerabilities(vulnerabilities):
     # get rid of general information and open ports (duplicate information)
@@ -163,8 +168,8 @@ def __cleanupVulnerabilities(vulnerabilities):
                  '1.3.6.1.4.1.25623.1.0.14260',    # nikto (NASL wrapper)
                  '1.3.6.1.4.1.25623.1.0.80110'     # wapiti (NASL wrapper)
                  ]
-    isNotGeneralInfo = lambda vuln: vuln.references['nvtid'] not in filterOIDs and True or False
-    isNotOpenPort = lambda vuln: vuln.description != 'Open port.' and True or False
+    isNotGeneralInfo = lambda vuln: vuln['nvtid'] not in filterOIDs and True or False
+    isNotOpenPort = lambda vuln: vuln['description'] != 'Open port.' and True or False
     for k in vulnerabilities:
         vulnerabilities[k] = filter(isNotGeneralInfo, vulnerabilities[k])
         vulnerabilities[k] = filter(isNotOpenPort, vulnerabilities[k])
@@ -172,9 +177,7 @@ def __cleanupVulnerabilities(vulnerabilities):
 
 if __name__ == '__main__':
     openvas_xml_report = file('../../docs/report-samples/openvas-2hosts-2012_03_24.xml', 'r')
-    
-    report = Report()
-    report.open_ports, report.vulnerabilities = parseXML(openvas_xml_report)
+    report = parseXML(openvas_xml_report)
     print report.printFullReport()
               
             
