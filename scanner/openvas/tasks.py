@@ -70,7 +70,9 @@ def getReport(reportUuid):
     
     getReport_task = "--get-report %s > %s" % (reportUuid, report_xml)
     cmd = shlex.split(TOOL_PATH + getReport_task)
-    subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
+    r = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
+    
+    logger.info("Retvalue: %s" % r)
     
     logger.info("Report successfully generated: %s" % report_xml)
     
