@@ -91,6 +91,8 @@ def __cleanupResults(results):
                  ]
     isNotGeneralInfo = lambda nvtid: results['nvtid'] not in filterOIDs and True or False
     for r in results:
+        print results
+        print results[r]
         results[r] = filter(isNotGeneralInfo, results[r])
     return results
 
