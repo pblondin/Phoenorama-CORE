@@ -82,8 +82,8 @@ def run(openvas, **kwargs):
     while(status != "Done"):
         time.sleep( 2*60 ) # 2 minutes
         status = getStatus(report_uuid)
-        print "Task id %s is %s" % task_uuid, status
-    
+        logger.info("Task id %s is %s" % task_uuid, status)
+        
     # Save report
     __saveReport(report_uuid)
     logger.info("Report UUID: %s was successfully saved: %s" % report_uuid)
