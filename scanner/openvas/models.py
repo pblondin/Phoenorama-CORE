@@ -31,12 +31,22 @@ Created on Mar 29, 2012
 class Openvas():
 
     def __init__(self):
+        self._id = ''
         self.name = ''
         self.description = ''
         self.target = ''
-        self.task_uuid = ''
         self.report_uuid = ''
         self.status = ''
+        
+    def toJSON(self):
+        json = {'_id' : self._id,
+                'report_uuid' : self.report_uuid,
+                'name': self.name,
+                'description': self.description,
+                'target': self.target,
+                'status': self.status
+                }
+        return json
 
 class Report():
     def __init__(self, reportUuid=''):
@@ -104,7 +114,7 @@ class Report():
         return self.printSummary()
     
     def toJSON(self):
-        json = {'reportUuid' : self.reportUuid,
+        json = {'report_uuid' : self.reportUuid,
                 'scan_info' : self.scan_info,
                 'results_by_host': self.results_by_host
                 }
