@@ -20,8 +20,6 @@
 # the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
 #
 #######
-from StringIO import StringIO
-from pymongo import Connection
 
 '''
 Created on Mar 22, 2012
@@ -34,6 +32,8 @@ OpenVAS wrapper using omp client tool interface to communicate with OpenVAS mana
 @author: r00tmac
 '''
 import shlex, subprocess, re, uuid
+from StringIO import StringIO
+from pymongo import Connection
 from parser import parseXML
 from celery.task import task
 
