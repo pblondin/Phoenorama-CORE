@@ -10,7 +10,8 @@
 			"scan_stop": "",
 			"targets": "",
 			"command": "",
-			"version": ""
+			"version": "",
+			"extrainfo": ""
 		},
 	"results_by_host": 
 		{
