@@ -27,6 +27,7 @@ Created on Mar 27, 2012
 @author: r00tmac
 '''
 
+import re
 from lxml import etree
 from models import Report
 from base64 import b64encode
@@ -36,12 +37,13 @@ def parse(document):
     report = Report(root.xpath('/report/@id')[0])
     
     # Fill the scan_info dictionary
-    report.scan_info['task_uuid'] = ""
-    report.scan_info['scan_start'] = ""
-    report.scan_info['scan_end'] = ""
-    report.scan_info['targets'] = ""
+    report.scan_info['scan_start'] = root.xpath('//scan_start')[0].text
+    report.scan_info['scan_end'] = root.xpath('//scan_end')[0].text
     report.scan_info['command'] = ""
-    report.scan_info['version'] = ""
+    
+    #@TODO: add a safety net
+    general_scan_info  = root.xpath('//nvt[@oid="1.3.6.1.4.1.25623.1.0.19506"]/../description')[0].text    
+    report.scan_info['version'], report.scan_info['extrainfo'] = re.search("OpenVAS version : (.*)\s(.*)", general_scan_info).group(1,2)
 
     # iterate over vulnerabilities
     for result in root.xpath('//result'):
@@ -95,7 +97,7 @@ def __cleanupResults(results_by_host):
     isNotOpenPort = lambda vuln: vuln['description'] != 'Open port.' and True or False
     for r in results_by_host:
         results_by_host[r] = filter(isNotGeneralInfo, results_by_host[r])
-        results_by_host[r] = filter(isNotGeneralInfo, results_by_host[r])
+        results_by_host[r] = filter(isNotOpenPort, results_by_host[r])
     return results_by_host
 
 if __name__ == '__main__':
