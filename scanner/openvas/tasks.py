@@ -24,17 +24,17 @@
 '''
 Created on Mar 22, 2012
 
-OpenVAS wrapper using omp client tool interface to communicate with OpenVAS manager and scanner.
+OpenVAS Task Wrapper using omp client tool interface to communicate with OpenVAS manager and scanner.
         http://www.openvas.org/install-packages.html#debian
         http://www.greenbone.net/learningcenter/remote_controlled.html
 
-@version: 0.1
+@version: 0.2
 @author: r00tmac
 '''
 import shlex, subprocess, re, uuid
 from StringIO import StringIO
 from pymongo import Connection
-from parser import parseXML
+from parser import parse
 from celery.task import task
 
 TOOL_PATH = '/usr/bin/omp --username "guest" --password "guest" ' # Make sure the leave a space at the end
@@ -74,7 +74,7 @@ def saveReport(reportUuid):
     
     logger.info("Retvalue: %s" % report_xml)
   
-    report = parseXML(StringIO(report_xml))
+    report = parse(StringIO(report_xml))
     logger.info(report.printFullReport())
     
     openvasReport = Connection().phoenorama.openvasReport    

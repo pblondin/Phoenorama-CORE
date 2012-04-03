@@ -4,7 +4,7 @@ Created on Mar 24, 2012
 @author: r00tme
 '''
 
-from scanner.openvas.model import Openvas
+from scanner.openvas.models import Openvas
 from scanner.openvas.tasks import run, saveReport
 
 
