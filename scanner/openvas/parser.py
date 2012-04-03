@@ -95,7 +95,7 @@ def __cleanupResults(results_by_host):
     isNotOpenPort = lambda vuln: vuln['description'] != 'Open port.' and True or False
     for r in results_by_host:
         results_by_host[r] = filter(isNotGeneralInfo, results_by_host[r])
-        results_by_host[r] = filter(isNotOpenPort, results_by_host[r])
+        results_by_host[r] = filter(isNotGeneralInfo, results_by_host[r])
     return results_by_host
 
 if __name__ == '__main__':
