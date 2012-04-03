@@ -34,51 +34,48 @@ def parse(document):
     root = etree.parse(document)
     report = Report(root.xpath('/report/@id')[0])
     
-    vulnerabilities = {}
-    # iterate over vulnerabilities
+    # Fill the scan_info dictionary
+    report.scan_info['task_uuid'] = ""
+    report.scan_info['scan_start'] = ""
+    report.scan_info['scan_end'] = ""
+    report.scan_info['targets'] = ""
+    report.scan_info['command'] = ""
+    report.scan_info['version'] = ""
+    
+    results = {}
+    # iterate over results
     for result in root.xpath('//result'):
-        host = result.xpath('host')[0].text
-        if not vulnerabilities.has_key(host):
-            vulnerabilities[host] = []
+        hostname = result.xpath('host')[0].text
+        if not results.has_key(hostname):
+            results[hostname] = []
             
-        vuln = {}
+        result = {}
         
         # Summary
-        vuln['description'] = result.xpath('description')[0].text.strip()
-        vuln['name'] = result.xpath('nvt/name')[0].text
-        vuln['service'] = result.xpath('port')[0].text
+        result['description'] = result.xpath('description')[0].text.strip()
+        result['name'] = result.xpath('nvt/name')[0].text
+        result['service'] = result.xpath('port')[0].text
         
         # Risk
-        vuln['risk_factor'] = result.xpath('nvt/risk_factor')[0].text
-        vuln['cvss'] = result.xpath('nvt/cvss_base')[0].text
-        vuln['threat'] = result.xpath('threat')[0].text
+        result['risk_factor'] = result.xpath('nvt/risk_factor')[0].text
+        result['cvss'] = result.xpath('nvt/cvss_base')[0].text
+        result['threat'] = result.xpath('threat')[0].text
         
         # References
-        vuln['nvtid'] = result.xpath('nvt/@oid')[0] #oid attribute
+        result['nvtid'] = result.xpath('nvt/@oid')[0] #oid attribute
         cve = result.xpath('nvt/cve')[0].text
-        vuln['cve'] = cve if cve != 'NOCVE' else None
+        result['cve'] = cve if cve != 'NOCVE' else None
         bid = result.xpath('nvt/bid')[0].text
-        vuln['bid'] = bid if bid != 'NOBID' else None
+        result['bid'] = bid if bid != 'NOBID' else None
         
-        # add vuln to vulnerabilities dictionary
-        vulnerabilities[host].append(vuln)
-      
-    openPorts = {}
-    # iterate over open ports
-    for port in root.xpath('//ports/port'):
-        host = port.xpath('host')[0].text
-        if not openPorts.has_key(host):
-            openPorts[host] = []
+        # add result to results dictionary
+        results[hostname].append(result)
         
-        # add port to open ports dictionary
-        openPorts[host].append(port.text)
-        
-    report.open_ports_by_host = openPorts
-    report.vulnerabilities_by_host = __cleanupVulnerabilities(vulnerabilities)
+    report.results_by_host = __cleanupResults(results)
     return report
 
-def __cleanupVulnerabilities(vulnerabilities):
-    # get rid of general information and open ports (duplicate information)
+def __cleanupResults(results):
+    # get rid of general information (duplicate information)
     filterOIDs = ['1.3.6.1.4.1.25623.1.0.900239',  # open tcp ports
                  '1.3.6.1.4.1.25623.1.0.103978',   # open upd ports
                  '1.3.6.1.4.1.25623.1.0.51662',    # traceroute
@@ -92,12 +89,10 @@ def __cleanupVulnerabilities(vulnerabilities):
                  '1.3.6.1.4.1.25623.1.0.14260',    # nikto (NASL wrapper)
                  '1.3.6.1.4.1.25623.1.0.80110'     # wapiti (NASL wrapper)
                  ]
-    isNotGeneralInfo = lambda vuln: vuln['nvtid'] not in filterOIDs and True or False
-    isNotOpenPort = lambda vuln: vuln['description'] != 'Open port.' and True or False
-    for k in vulnerabilities:
-        vulnerabilities[k] = filter(isNotGeneralInfo, vulnerabilities[k])
-        vulnerabilities[k] = filter(isNotOpenPort, vulnerabilities[k])
-    return vulnerabilities
+    isNotGeneralInfo = lambda result: result['nvtid'] not in filterOIDs and True or False
+    for r in results:
+        results[r] = filter(isNotGeneralInfo, results[r])
+    return results
 
 if __name__ == '__main__':
     openvas_xml_report = file('../../docs/report-samples/openvas-2hosts-2012_03_24.xml', 'r')

@@ -40,14 +40,37 @@ class Openvas():
 class Report():
     def __init__(self, reportUuid=''):
         self.reportUuid = reportUuid
-        self.open_ports_by_host = {}         # using host as key
-        self.vulnerabilities_by_host = {}    # using host as key
-        
+        self.scan_info = {
+                            "_type": "OPENVAS",
+                            "task_uuid" : "",
+                            "scan_start" : "",
+                            "scan_stop": "",
+                            "targets": "",
+                            "command": "",
+                            "version": ""
+                          }
+        self.results_by_host = {
+                                    "hostname" : "",
+                                    "results" : [
+                                            {
+                                                "description" : "",
+                                                "service" : "",
+                                                "bid" : "",
+                                                "risk_factor" : "",
+                                                "threat" : "",
+                                                "nvtid" : "",
+                                                "cve" : "",
+                                                "cvss" : "",
+                                                "name" : ""                    
+                                            }
+                                        ]
+                                }
+                                 
     def getHosts(self):
-        return set(self.open_ports_by_host.keys() + self.vulnerabilities_by_host.keys())
+        return set(self.results_by_host.keys())
     
     def getHighestThreat(self, host):
-        threats = [vuln['threat'] for vuln in self.vulnerabilities_by_host[host]]
+        threats = [vuln['threat'] for vuln in self.results_by_host[host]]
         
         if 'High' in threats: return 'High'
         elif 'Medium' in threats: return 'Medium'
@@ -60,18 +83,14 @@ class Report():
         for host in self.getHosts():
             buf += "Host: " + host + "\n"
             buf += "\tThreat: " + self.getHighestThreat(host) + "\n"
-            buf += "\tNumber of open ports: " + str(len(self.open_ports_by_host[host])) + "\n"
-            buf += "\tNumber of vulnerabilities: " + str(len(self.vulnerabilities_by_host[host])) + "\n"
+            buf += "\tNumber of vulnerabilities: " + str(len(self.results_by_host[host])) + "\n"
         return buf
         
     def printHostResult(self, host):
         buf = "Host: " + host + "\n"
         buf += "Highest threat: " + self.getHighestThreat(host) + "\n"
-        buf += "List of open ports: \n"
-        for port in self.open_ports_by_host[host]:
-            buf += "\t" + port + "\n"
         buf += "\nList of vulnerabilities: \n"
-        for vuln in self.vulnerabilities_by_host[host]:
+        for vuln in self.results_by_host[host]:
             buf += "\tName: " + vuln['name'] + "\n"
             buf += "\tService: " + vuln['service'] + "\n"
             buf += "\tDescription: " + vuln['description'] + "\n"
@@ -101,14 +120,3 @@ class Report():
     
     def __str__(self):
         return self.printSummary()
-    
-    
-    def toJSON(self):
-        jsonReport = {'report_uuid': self.reportUuid, 
-                      'open_ports': [], 
-                      'vulnerabilities': []
-                      }
-        for host in self.getHosts():
-            jsonReport['open_ports'].append({'host': host, 'ports': self.open_ports_by_host[host] })
-            jsonReport['vulnerabilities'].append({'host': host, 'vulnerabilities': self.vulnerabilities_by_host[host]})
-        return jsonReport

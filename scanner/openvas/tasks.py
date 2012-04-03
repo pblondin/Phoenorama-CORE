@@ -78,7 +78,7 @@ def saveReport(reportUuid):
     logger.info(report.printFullReport())
     
     openvasReport = Connection().phoenorama.openvasReport    
-    openvasReport.insert(report.toJSON())
+    openvasReport.insert(report)
     
     return "Report was successfully generated and saved to DB"
     
