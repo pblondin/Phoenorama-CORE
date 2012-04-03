@@ -99,7 +99,11 @@ def run(openvas, **kwargs):
 def getStatus(taskUuid):
     status_task = "-G"
     cmd = shlex.split(TOOL_PATH + status_task)
+    pattern = "%s\s+(.*)\s" % taskUuid
     status = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
+    print status
+    status = re.search(pattern, status).group(1)
+    print status
     return status
 
 
