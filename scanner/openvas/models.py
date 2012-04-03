@@ -27,6 +27,7 @@ Created on Mar 29, 2012
 
 @author: r00tmac
 '''
+
 class Openvas():
 
     def __init__(self):
@@ -40,37 +41,14 @@ class Openvas():
 class Report():
     def __init__(self, reportUuid=''):
         self.reportUuid = reportUuid
-        self.scan_info = {
-                            "_type": "OPENVAS",
-                            "task_uuid" : "",
-                            "scan_start" : "",
-                            "scan_stop": "",
-                            "targets": "",
-                            "command": "",
-                            "version": ""
-                          }
-        self.results_by_host = {
-                                    "hostname" : "",
-                                    "results" : [
-                                            {
-                                                "description" : "",
-                                                "service" : "",
-                                                "bid" : "",
-                                                "risk_factor" : "",
-                                                "threat" : "",
-                                                "nvtid" : "",
-                                                "cve" : "",
-                                                "cvss" : "",
-                                                "name" : ""                    
-                                            }
-                                        ]
-                                }
+        self.scan_info = {}
+        self.results_by_host = {}
                                  
     def getHosts(self):
-        return set(self.results_by_host.keys())
+        return self.results_by_host.keys()
     
-    def getHighestThreat(self, host):
-        threats = [vuln['threat'] for vuln in self.results_by_host[host]]
+    def getHighestThreat(self, hostname):
+        threats = [results['threat'] for results in self.results_by_host[hostname]]
         
         if 'High' in threats: return 'High'
         elif 'Medium' in threats: return 'Medium'
@@ -80,32 +58,36 @@ class Report():
         
     def printSummary(self):
         buf = ""
-        for host in self.getHosts():
-            buf += "Host: " + host + "\n"
-            buf += "\tThreat: " + self.getHighestThreat(host) + "\n"
-            buf += "\tNumber of vulnerabilities: " + str(len(self.results_by_host[host])) + "\n"
+        for hostname in self.getHosts():
+            buf += "Host: " + hostname + "\n"
+            buf += "\tThreat: " + self.getHighestThreat(hostname) + "\n"
+            buf += "\tNumber of vulnerabilities: " + str(len(self.results_by_host[hostname])) + "\n"
         return buf
         
-    def printHostResult(self, host):
-        buf = "Host: " + host + "\n"
-        buf += "Highest threat: " + self.getHighestThreat(host) + "\n"
+    def printHostResult(self, hostname):
+        buf = "Host: " + hostname + "\n"
+        buf += "Highest threat: " + self.getHighestThreat(hostname) + "\n"
         buf += "\nList of vulnerabilities: \n"
-        for vuln in self.results_by_host[host]:
-            buf += "\tName: " + vuln['name'] + "\n"
-            buf += "\tService: " + vuln['service'] + "\n"
-            buf += "\tDescription: " + vuln['description'] + "\n"
-            buf += "\tThreat: " + vuln['threat'] + "\n"
-            if vuln['risk_factor']:
-                buf += "\tRisk factor: " + vuln['risk_factor'] + "\n"
-            if vuln['cvss']:
-                buf += "\tCVSS: " + vuln['cvss'] + "\n"
-            if vuln['nvtid']:
-                buf += "\tNVTID: " + vuln['nvtid'] + "\n"
-            if vuln['cve']:
-                buf += "\tCVE: " + vuln['cve'] + "\n"
-            if vuln['bid']:
-                buf += "\tBID: " + vuln['bid'] + "\n"
-            buf += "\n"        
+        for result in self.results_by_host[hostname]:
+            if result['name']:
+                buf += "\tName: " + result['name'] + "\n"
+            if result['service']:
+                buf += "\tService: " + result['service'] + "\n"
+            if result['description']:
+                buf += "\tDescription: " + result['description'] + "\n"
+            if result['threat']:
+                buf += "\tThreat: " + result['threat'] + "\n"
+            if result['risk_factor']:
+                buf += "\tRisk factor: " + result['risk_factor'] + "\n"
+            if result['cvss']:
+                buf += "\tCVSS: " + result['cvss'] + "\n"
+            if result['nvtid']:
+                buf += "\tNVTID: " + result['nvtid'] + "\n"
+            if result['cve']:
+                buf += "\tCVE: " + result['cve'] + "\n"
+            if result['bid']:
+                buf += "\tBID: " + result['bid'] + "\n"
+            buf += "\n"
         return buf
     
     def printFullReport(self):
@@ -114,8 +96,8 @@ class Report():
         buf += self.printSummary() + "\n"
         buf += "Detailed report\n"
         buf += "----------------------\n"
-        for host in self.getHosts():
-            buf += self.printHostResult(host) + "\n"
+        for hostname in self.getHosts():
+            buf += self.printHostResult(hostname) + "\n"
         return buf
     
     def __str__(self):

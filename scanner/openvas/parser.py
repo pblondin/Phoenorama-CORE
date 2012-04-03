@@ -29,6 +29,7 @@ Created on Mar 27, 2012
 
 from lxml import etree
 from models import Report
+from base64 import b64encode
                     
 def parse(document):
     root = etree.parse(document)
@@ -41,13 +42,14 @@ def parse(document):
     report.scan_info['targets'] = ""
     report.scan_info['command'] = ""
     report.scan_info['version'] = ""
-    
-    results = {}
+
     # iterate over vulnerabilities
     for result in root.xpath('//result'):
-        hostname = result.xpath('host')[0].text
-        if not results.has_key(hostname):
-            results[hostname] = []
+        hostname = b64encode(result.xpath('host')[0].text) # hostname has to be base64 encode to prevent "." in key (mongodb issue)
+        
+        # check if result already exist for the hostname
+        if not report.results_by_host.has_key(hostname):
+            report.results_by_host[hostname] = []
             
         vuln = {}
         
@@ -68,13 +70,13 @@ def parse(document):
         bid = result.xpath('nvt/bid')[0].text
         vuln['bid'] = bid if bid != 'NOBID' else None
         
-        # add result to results dictionary
-        results[hostname].append(vuln)
+        # append vulnerability to results list
+        report.results_by_host[hostname].append(vuln)
         
-    report.results_by_host = __cleanupResults(results)
+    report.results_by_host = __cleanupResults(report.results_by_host)
     return report
 
-def __cleanupResults(results):
+def __cleanupResults(results_by_host):
     # get rid of general information (duplicate information)
     filterOIDs = ['1.3.6.1.4.1.25623.1.0.900239',  # open tcp ports
                  '1.3.6.1.4.1.25623.1.0.103978',   # open upd ports
@@ -90,9 +92,11 @@ def __cleanupResults(results):
                  '1.3.6.1.4.1.25623.1.0.80110'     # wapiti (NASL wrapper)
                  ]
     isNotGeneralInfo = lambda vuln: vuln['nvtid'] not in filterOIDs and True or False
-    for r in results:
-        results[r] = filter(isNotGeneralInfo, results[r])
-    return results
+    isNotOpenPort = lambda vuln: vuln['description'] != 'Open port.' and True or False
+    for r in results_by_host:
+        results_by_host[r] = filter(isNotGeneralInfo, results_by_host[r])
+        results_by_host[r] = filter(isNotOpenPort, results_by_host[r])
+    return results_by_host
 
 if __name__ == '__main__':
     openvas_xml_report = file('../../docs/report-samples/openvas-2hosts-2012_03_24.xml', 'r')
