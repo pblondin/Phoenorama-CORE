@@ -82,7 +82,7 @@ def run(openvas, **kwargs):
     while(status != "Done"):
         time.sleep( 2*60 ) # 2 minutes
         status = getStatus(report_uuid)
-        print "Task id % is %s" % task_uuid, status
+        print "Task id %s is %s" % task_uuid, status
     
     # Save report
     __saveReport(report_uuid)
@@ -97,7 +97,7 @@ def run(openvas, **kwargs):
 
 @task(name="openvas.getStatus")
 def getStatus(taskUuid):
-    status_task = "omp -G"
+    status_task = "-G"
     cmd = shlex.split(TOOL_PATH + status_task)
     status = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
     return status
