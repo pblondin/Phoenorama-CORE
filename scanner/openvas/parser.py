@@ -89,7 +89,7 @@ def __cleanupResults(results):
                  '1.3.6.1.4.1.25623.1.0.14260',    # nikto (NASL wrapper)
                  '1.3.6.1.4.1.25623.1.0.80110'     # wapiti (NASL wrapper)
                  ]
-    isNotGeneralInfo = lambda result: result['nvtid'] not in filterOIDs and True or False
+    isNotGeneralInfo = lambda nvtid: results['nvtid'] not in filterOIDs and True or False
     for r in results:
         results[r] = filter(isNotGeneralInfo, results[r])
     return results
