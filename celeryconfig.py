@@ -4,7 +4,7 @@ Created on Mar 17, 2012
 @author: r00tme
 '''
 # List of modules to import when celery starts.
-CELERY_IMPORTS = ("scanner.openvas.tasks", )
+CELERY_IMPORTS = ("scanner.openvas.tasks", "scanner.nmap.tasks")
 
 ## Result store settings.
 CELERY_RESULT_BACKEND = "amqp"
