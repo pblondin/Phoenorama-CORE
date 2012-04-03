@@ -43,33 +43,33 @@ def parse(document):
     report.scan_info['version'] = ""
     
     results = {}
-    # iterate over results
-    for result in root.xpath('//result'):
-        hostname = result.xpath('host')[0].text
+    # iterate over vulnerabilities
+    for vuln in root.xpath('//result'):
+        hostname = vuln.xpath('host')[0].text
         if not results.has_key(hostname):
             results[hostname] = []
             
         result = {}
         
         # Summary
-        result['description'] = result.xpath('description')[0].text.strip()
-        result['name'] = result.xpath('nvt/name')[0].text
-        result['service'] = result.xpath('port')[0].text
+        result['description'] = vuln.xpath('description')[0].text.strip()
+        result['name'] = vuln.xpath('nvt/name')[0].text
+        result['service'] = vuln.xpath('port')[0].text
         
         # Risk
-        result['risk_factor'] = result.xpath('nvt/risk_factor')[0].text
-        result['cvss'] = result.xpath('nvt/cvss_base')[0].text
-        result['threat'] = result.xpath('threat')[0].text
+        result['risk_factor'] = vuln.xpath('nvt/risk_factor')[0].text
+        result['cvss'] = vuln.xpath('nvt/cvss_base')[0].text
+        result['threat'] = vuln.xpath('threat')[0].text
         
         # References
-        result['nvtid'] = result.xpath('nvt/@oid')[0] #oid attribute
-        cve = result.xpath('nvt/cve')[0].text
+        result['nvtid'] = vuln.xpath('nvt/@oid')[0] #oid attribute
+        cve = vuln.xpath('nvt/cve')[0].text
         result['cve'] = cve if cve != 'NOCVE' else None
-        bid = result.xpath('nvt/bid')[0].text
+        bid = vuln.xpath('nvt/bid')[0].text
         result['bid'] = bid if bid != 'NOBID' else None
         
         # add result to results dictionary
-        results[hostname].append(result)
+        results[hostname].append(vuln)
         
     report.results_by_host = __cleanupResults(results)
     return report
