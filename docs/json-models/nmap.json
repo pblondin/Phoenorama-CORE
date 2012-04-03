@@ -1,0 +1,29 @@
+{
+	"result_uuid" : "",
+	"scan_info" : 
+		{
+			"_type": "NMAP",
+			"task_uuid" : "",
+			"scan_start" : "",
+			"scan_stop": "",
+			"targets": "",
+			"command": "",
+			"version": ""
+		},
+	"results_by_host": 
+		{
+			"hostname" : "",
+			"results" :
+				[
+					{
+						"portid": "",
+						"service": "",
+						"product": "",
+						"version": "",
+						"scriptit": "",
+						"output": ""					
+					}
+				]
+		}
+}
+                        
