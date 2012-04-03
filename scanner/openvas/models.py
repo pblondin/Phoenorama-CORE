@@ -102,3 +102,10 @@ class Report():
     
     def __str__(self):
         return self.printSummary()
+    
+    def toJSON(self):
+        json = {'reportUuid' : self.reportUuid,
+                'scan_info' : self.scan_info,
+                'results_by_host': self.results_by_host
+                }
+        return json
