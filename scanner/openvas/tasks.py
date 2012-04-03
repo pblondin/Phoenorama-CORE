@@ -39,52 +39,59 @@ from celery.task import task
 
 TOOL_PATH = '/usr/bin/omp --username "guest" --password "guest" ' # Make sure the leave a space at the end
 
+@task(name="openvas.save")
+def save(openvas, **kwargs):
+    logger = save.get_logger()
+    
+    openvasTask = Connection().phoenorama.openvasTask
+    openvasTask.insert(openvas.toJSON())
+    
+    logger.info("Openvas Task was successfully saved")
+    
+
 @task(name="openvas.run")
-def run(target, **kwargs):
+def run(openvas, **kwargs):
     '''
     Start OpenVAS task
     
-    @postcondition: task was properly configured.
+    Staging:
+        1. Configure scan
+        2. Start scan
+        3. Save report    
     '''
     logger = run.get_logger()
-    task_uuid = __configure(target)
     
+    # Configure scan
+    task_uuid = __configure(openvas.target)
+    logger.info("Task was successfully configured")
+    
+    # Update OpenVAS Task status to RUNNING
+    openvasTask = Connection().phoenorama.openvasTask
+    openvasTask.update({'_id': openvas._id}, {'status': "RUNNING"})
+    logger.info("Status was successfully updated to RUNNING for Task id %s" % openvas._id)
+    
+    # Start scan
+    #TODO: Validate start_task status
     start_task = "--start-task %s" % (task_uuid)
     cmd = shlex.split(TOOL_PATH + start_task)
     report_uuid = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
+    logger.info("Task was successfully started")
     
-    #TODO: Validate start_task status
+    # Save report
+    __saveReport(report_uuid)
+    logger.info("Report UUID: %s was successfully saved: %s" % report_uuid)
     
-    logger.info("Report_uuid: %s" % report_uuid)
-    logger.info("Task is successfully started")
+    # Update OpenVAS Task status to DONE
+    openvasTask = Connection().phoenorama.openvasTask
+    openvasTask.update({'_id': openvas._id}, {'status': "DONE"})
+    logger.info("Status was successfully updated to DONE for Task id %s" % openvas._id)
+    
     return task_uuid, report_uuid
 
 @task(name="openvas.getStatus")
 def getStatus(taskUuid):
     pass
     
-@task(name="openvas.saveReport")
-def saveReport(reportUuid):
-    logger = saveReport.get_logger()
-
-    getReport_task = "--get-report %s" % (reportUuid)
-    cmd = shlex.split(TOOL_PATH + getReport_task)
-    report_xml = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]    
-    #@TODO: check if output result is valid
-    
-    logger.info("Retvalue: %s" % report_xml)
-  
-    report = parse(StringIO(report_xml))
-    logger.info(report.printFullReport())
-    
-    openvasReport = Connection().phoenorama.openvasReport
-    openvasReport.insert(report.toJSON())
-    
-    return "Report was successfully generated and saved to DB"
-    
-@task(name="openvas.cleanup")
-def cleanup():
-    pass
 
 #############################################
 # Private methods
@@ -112,15 +119,25 @@ def __configure(target, **kwargs):
     # Sample: <create_target_response status="201" id="6095d2bf-9e03-4689-a717s -dc8038137004" status_text="OK, resource created"></create_target_response>
     status, target_uuid = re.search('status="(\d+)"\sid="(\S+)"', retvalue).group(1, 2)
     
-    #logger.info("Status: %s, Target_UUID: %s" % (status, target_uuid))
-    
     # Create a temporary task
     create_task = "--create-task --name %(uuid)s --target %(target_uuid)s --config daba56c8-73ec-11df-a475-002264764cea" % {"uuid": uuid.uuid4(), "target_uuid": target_uuid}
     cmd = shlex.split(TOOL_PATH + create_task)
     task_uuid = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
     
-    #logger.info("Task_uuid: %s" % task_uuid)
-    #logger.info("Task was successfully configured and is ready to start")
     return task_uuid
                    
+def __saveReport(reportUuid):
 
+    getReport_task = "--get-report %s" % (reportUuid)
+    cmd = shlex.split(TOOL_PATH + getReport_task)
+    report_xml = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]    
+    #@TODO: check if output result is valid
+  
+    report = parse(StringIO(report_xml))    
+    openvasReport = Connection().phoenorama.openvasReport
+    openvasReport.insert(report.toJSON())
+        
+    return "Report was successfully generated and saved to DB"
+
+def __cleanup():
+    pass
