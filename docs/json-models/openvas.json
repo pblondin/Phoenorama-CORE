@@ -1,3 +1,5 @@
+# NOTE: hostname key has to be convert to base64 since we cannot use "." in key name (i.e. 127.0.0.1)
+
 {
 	"result_uuid" : "",
 	"scan_info" : 
@@ -12,8 +14,7 @@
 		},
 	"results_by_host": 
 		{
-			"hostname" : "",
-			"results" :
+			"hostname" : 
 				[
 					{
 						"description" : "",
