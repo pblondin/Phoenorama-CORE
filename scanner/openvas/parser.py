@@ -97,8 +97,8 @@ class Report():
     
     def toJSON(self):
         jsonReport = {'report_uuid': self.reportUuid, 
-                      'open_ports': [{}], 
-                      'vulnerabilities': [{}]
+                      'open_ports': [], 
+                      'vulnerabilities': []
                       }
         for host in self.getHosts():
             jsonReport['open_ports'].append({'host': host, 'ports': self.open_ports_by_host[host] })
@@ -146,7 +146,7 @@ def parseXML(document):
         if not openPorts.has_key(host):
             openPorts[host] = []
         
-        # open port to open ports dictionary
+        # add port to open ports dictionary
         openPorts[host].append(port.text)
         
     report.open_ports_by_host = openPorts
