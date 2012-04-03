@@ -31,7 +31,7 @@ OpenVAS Task Wrapper using omp client tool interface to communicate with OpenVAS
 @version: 0.2
 @author: r00tmac
 '''
-import shlex, subprocess, re, uuid
+import shlex, subprocess, re, uuid, time
 from StringIO import StringIO
 from pymongo import Connection
 from parser import parse
@@ -67,7 +67,7 @@ def run(openvas, **kwargs):
     
     # Update OpenVAS Task status to RUNNING
     openvasTask = Connection().phoenorama.openvasTask
-    openvasTask.update({'_id': openvas._id}, {'status': "RUNNING"})
+    openvasTask.update({'_id': openvas._id}, {'status': "RUNNING", 'task_uuid': task_uuid})
     logger.info("Status was successfully updated to RUNNING for Task id %s" % openvas._id)
     
     # Start scan
@@ -76,6 +76,13 @@ def run(openvas, **kwargs):
     cmd = shlex.split(TOOL_PATH + start_task)
     report_uuid = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
     logger.info("Task was successfully started")
+    
+    # Wait till scan is finished
+    status = getStatus(report_uuid)
+    while(status != "Done"):
+        time.sleep( 2*60 ) # 2 minutes
+        status = getStatus(report_uuid)
+        print "Task id % is %s" % task_uuid, status
     
     # Save report
     __saveReport(report_uuid)
@@ -90,8 +97,11 @@ def run(openvas, **kwargs):
 
 @task(name="openvas.getStatus")
 def getStatus(taskUuid):
-    pass
-    
+    status_task = "omp -G"
+    cmd = shlex.split(TOOL_PATH + status_task)
+    status = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
+    return status
+
 
 #############################################
 # Private methods
