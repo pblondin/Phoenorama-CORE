@@ -72,13 +72,13 @@ def run(openvas, **kwargs):
     #TODO: Validate start_task status
     start_task = "--start-task %s" % (task_uuid)
     cmd = shlex.split(TOOL_PATH + start_task)
-    report_uuid = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
+    report_uuid = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0].strip()
     logger.info("Task was successfully started")
     
     # Wait till scan is finished
     status = getStatus(task_uuid)
     while(status != "Done"):
-        logger.info("Task id %s is %s" % task_uuid, status)
+        logger.info("Task id %s is %s" % (task_uuid, status))
         time.sleep( 60 ) # 1 minute
         status = getStatus(task_uuid)
         
@@ -106,10 +106,8 @@ def getStatus(taskUuid):
     cmd = shlex.split(TOOL_PATH + status_task)
     pattern = "%s(.*?)[0-9A-Fa-f]{8}" % taskUuid
     status = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
-    logger.info("Status: %s" % status)
     status = re.search(pattern, status).group(1)
     logger.info("Status: %s" % status)
-    print status.strip()
     return status.strip()
 
 
@@ -149,7 +147,7 @@ def __configure(target, **kwargs):
     cmd = shlex.split(TOOL_PATH + create_task)
     task_uuid = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
     
-    return task_uuid
+    return task_uuid.strip()
                    
 def __saveReport(reportUuid):
 
