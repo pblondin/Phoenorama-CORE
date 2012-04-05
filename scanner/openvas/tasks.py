@@ -79,7 +79,7 @@ def run(openvas, **kwargs):
     status = getStatus(report_uuid)
     while(status != "Done"):
         logger.info("Task id %s is %s" % task_uuid, status)
-        time.sleep( 2*60 ) # 2 minutes
+        time.sleep( 60 ) # 1 minute
         status = getStatus(task_uuid)
         
     # Save report
@@ -87,11 +87,16 @@ def run(openvas, **kwargs):
     logger.info("Report UUID: %s was successfully saved: %s" % report_uuid)
     
     # Update OpenVAS Task status to DONE
-    openvasTask = Connection().phoenorama.openvasTask
-    openvasTask.update({'_id': openvas._id}, {'status': "DONE"})
-    logger.info("Status was successfully updated to DONE for Task id %s" % openvas._id)
+    __updateStatus(openvas, "DONE")
     
     return task_uuid, report_uuid
+
+@task(name="openvas.stopTask")
+def stopTask(taskUuid):
+    stop_task = "<stop_task task_id='%s'/>" & taskUuid
+    cmd = shlex.split(TOOL_PATH + stop_task)
+    response = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
+    return response
 
 @task(name="openvas.getStatus")
 def getStatus(taskUuid):
