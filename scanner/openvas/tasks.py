@@ -84,7 +84,7 @@ def run(openvas, **kwargs):
         
     # Save report
     __saveReport(report_uuid)
-    logger.info("Report UUID: %s was successfully saved: %s" % report_uuid)
+    logger.info("Report UUID: %s was successfully saved" % report_uuid)
     
     # Update OpenVAS Task status to DONE
     __updateStatus(openvas, "DONE")
