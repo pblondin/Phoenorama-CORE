@@ -74,11 +74,15 @@ def run(openvas, **kwargs):
     
     # Update OpenVAS Task status, task_uuid and report_uuid
     __updateOpenvas(openvas, {'status': "RUNNING", 'task_uuid': task_uuid, 'report_uuid': report_uuid})
+    # Update local OpenVAS Task instance with task_uuid
+    openvas.task_uuid = task_uuid
     
     # Wait till scan is finished
     status = getStatus(task_uuid)
     while(status != "Done"):
         logger.info("Task id %s is %s" % (task_uuid, status))
+        if (status == "Stopped"):
+            exit()
         time.sleep( 60 ) # 1 minute
         status = getStatus(task_uuid)
         
