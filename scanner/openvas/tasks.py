@@ -100,7 +100,7 @@ def stopTask(taskUuid):
 
 @task(name="openvas.getStatus")
 def getStatus(taskUuid):
-    logger = getStatus.getLogger()
+    logger = getStatus.get_logger()
     
     status_task = "-G %s" % taskUuid
     cmd = shlex.split(TOOL_PATH + status_task)
