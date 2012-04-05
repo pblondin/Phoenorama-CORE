@@ -66,9 +66,7 @@ def run(openvas, **kwargs):
     logger.info("Task was successfully configured")
     
     # Update OpenVAS Task status to RUNNING
-    openvasTask = Connection().phoenorama.openvasTask
-    openvasTask.update({'_id': openvas._id}, {'status': "RUNNING", 'task_uuid': task_uuid})
-    logger.info("Status was successfully updated to RUNNING for Task id %s" % openvas._id)
+    __updateStatus(openvas, "RUNNING")
     
     # Start scan
     #TODO: Validate start_task status
@@ -110,6 +108,11 @@ def getStatus(taskUuid):
 #############################################
 # Private methods
 #############################################
+def __updateStatus(openvas, status):
+    openvasTask = Connection().phoenorama.openvasTask
+    openvasTask.update({'_id': openvas._id}, {'status': status})
+    return "Status was successfully to %s" % status
+
 def __configure(target, **kwargs):
     '''
     Private method to configure omp client tool.
