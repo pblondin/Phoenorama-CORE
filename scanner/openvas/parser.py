@@ -84,14 +84,15 @@ def __cleanupResults(results_by_host):
                  '1.3.6.1.4.1.25623.1.0.103978',   # open upd ports
                  '1.3.6.1.4.1.25623.1.0.51662',    # traceroute
                  '1.3.6.1.4.1.25623.1.0.90022',    # ssh autorization
+                 '1.3.6.1.4.1.25623.1.0.10330',    # Service running on this port
                  '1.3.6.1.4.1.25623.1.0.90011',    # smbclient not available
                  '1.3.6.1.4.1.25623.1.0.66286',    # unknown service
                  '1.3.6.1.4.1.25623.1.0.810003',   # host summary
                  '1.3.6.1.4.1.25623.1.0.19506',    # scan information
-                 '1.3.6.1.4.1.25623.1.0.103079'    # DIRB (NASL wrapper)
+                 '1.3.6.1.4.1.25623.1.0.103079',   # DIRB (NASL wrapper)
                  '1.3.6.1.4.1.25623.1.0.110001',   # arachni (NASL wrapper)
                  '1.3.6.1.4.1.25623.1.0.14260',    # nikto (NASL wrapper)
-                 '1.3.6.1.4.1.25623.1.0.80110'     # wapiti (NASL wrapper)
+                 '1.3.6.1.4.1.25623.1.0.80110',    # wapiti (NASL wrapper)
                  ]
     isNotGeneralInfo = lambda vuln: vuln['nvtid'] not in filterOIDs and True or False
     isNotOpenPort = lambda vuln: vuln['description'] != 'Open port.' and True or False
