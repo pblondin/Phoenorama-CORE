@@ -76,7 +76,7 @@ def run(openvas, **kwargs):
     logger.info("Task was successfully started")
     
     # Wait till scan is finished
-    status = getStatus(report_uuid)
+    status = getStatus(task_uuid)
     while(status != "Done"):
         logger.info("Task id %s is %s" % task_uuid, status)
         time.sleep( 60 ) # 1 minute
