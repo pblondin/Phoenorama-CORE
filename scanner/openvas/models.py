@@ -29,7 +29,6 @@ Created on Mar 29, 2012
 
 class Openvas():
     def __init__(self):
-        self._id = ''
         self.task_uuid = ''
         self.name = ''
         self.description = ''
@@ -38,8 +37,7 @@ class Openvas():
         self.status = ''
         
     def toJSON(self):
-        json = {'_id': self._id,
-                'task_uuid' : self.task_uuid,
+        json = {'task_uuid' : self.task_uuid,
                 'report_uuid' : self.report_uuid,
                 'name': self.name,
                 'description': self.description,
