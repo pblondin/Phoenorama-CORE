@@ -39,7 +39,7 @@ def parse(document):
     # Fill the scan_info dictionary
     report.scan_info['scan_start'] = root.xpath('//scan_start')[0].text
     report.scan_info['scan_end'] = root.xpath('//scan_end')[0].text
-    report.scan_info['command'] = ""
+    report.scan_info['command'] = "" #@TODO: get command field
     
     #@TODO: add a safety net
     general_scan_info  = root.xpath('//nvt[@oid="1.3.6.1.4.1.25623.1.0.19506"]/../description')[0].text    
