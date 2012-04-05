@@ -100,7 +100,7 @@ def stopTask(taskUuid):
 
 @task(name="openvas.getStatus")
 def getStatus(taskUuid):
-    status_task = "-G"
+    status_task = "-G %s" % taskUuid
     cmd = shlex.split(TOOL_PATH + status_task)
     pattern = "%s(.*?)[0-9A-Fa-f]{8}" % taskUuid
     status = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
