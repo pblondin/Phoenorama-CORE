@@ -65,15 +65,15 @@ def run(openvas, **kwargs):
     task_uuid = __configure(openvas.target)
     logger.info("Task was successfully configured")
     
-    # Update OpenVAS Task status to RUNNING
-    __updateStatus(openvas, "RUNNING")
-    
     # Start scan
     #TODO: Validate start_task status
     start_task = "--start-task %s" % (task_uuid)
     cmd = shlex.split(TOOL_PATH + start_task)
     report_uuid = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0].strip()
     logger.info("Task was successfully started")
+    
+    # Update OpenVAS Task status, task_uuid and report_uuid
+    __updateOpenvas(openvas, {'status': "RUNNING", 'task_uuid': task_uuid, 'report_uuid': report_uuid})
     
     # Wait till scan is finished
     status = getStatus(task_uuid)
@@ -87,7 +87,7 @@ def run(openvas, **kwargs):
     logger.info("Report UUID: %s was successfully saved" % report_uuid)
     
     # Update OpenVAS Task status to DONE
-    __updateStatus(openvas, "DONE")
+    __updateOpenvas(openvas, {'status':"DONE"})
     
     return task_uuid, report_uuid
 
@@ -114,10 +114,10 @@ def getStatus(taskUuid):
 #############################################
 # Private methods
 #############################################
-def __updateStatus(openvas, status):
+def __updateOpenvas(openvas, fieldsToUpdate):
     openvasTask = Connection().phoenorama.openvasTask
-    openvasTask.update({'_id': openvas._id}, {'status': status})
-    return "Status was successfully to %s" % status
+    openvasTask.update({'task_uuid': openvas.task_uuid}, fieldsToUpdate)
+    return "OpenVAS was successfully updated"
 
 def __configure(target, **kwargs):
     '''
