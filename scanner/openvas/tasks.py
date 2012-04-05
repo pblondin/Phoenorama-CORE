@@ -116,7 +116,7 @@ def getStatus(taskUuid):
 #############################################
 def __updateOpenvas(openvas, fieldsToUpdate):
     openvasTask = Connection().phoenorama.openvasTask
-    openvasTask.update({'task_uuid': openvas.task_uuid}, fieldsToUpdate)
+    openvasTask.update({'task_uuid': openvas.task_uuid}, {'$set' : fieldsToUpdate})
     return "OpenVAS was successfully updated"
 
 def __configure(target, **kwargs):
