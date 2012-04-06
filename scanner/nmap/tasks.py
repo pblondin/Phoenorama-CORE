@@ -48,13 +48,16 @@ def save(nmap, **kwargs):
     logger.info("Nmap Task was successfully saved")
 
 @task(name="nmap.run")
-def run(target, **kwargs):
+def run(nmap, **kwargs):
     '''
     Start nmap task
     '''
     logger = run.get_logger()
     
-    start_task = "%s" % (target)
+    # Update OpenVAS Task status and report_uuid
+    __updateNmap(nmap, {'status': "RUNNING"})
+    
+    start_task = "%s" % (nmap.target)
     cmd = shlex.split(TOOL_PATH + start_task)
     report_xml = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]
     
@@ -64,9 +67,12 @@ def run(target, **kwargs):
     report = parse(StringIO(report_xml))    
     nmapReport = Connection().phoenorama.nmapReport
     nmapReport.insert(report.toJSON())
+    
+    # Update OpenVAS Task status and report_uuid
+    __updateNmap(nmap, {'status': "DONE", 'report_uuid': report.report_uuid})
 
     logger.info("Report id: %s was successfully generated and saved to DB" % report.report_uuid)
-    return report_xml
+    return report.report_uuid
 
 @task(name="nmap.getStatus")
 def getStatus(taskUuid):
