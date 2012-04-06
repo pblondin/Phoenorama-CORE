@@ -1,0 +1,245 @@
+{
+        "_id" : ObjectId("4f7e1430ed14f4358b000000"),
+        "description" : "Openvas scan against localhost",
+        "name" : "Basic test",
+        "report_uuid" : "9380ccdd-ab6c-4ae3-ab10-4eac0bab5bfb",
+        "status" : "DONE",
+        "target" : "localhost",
+        "task_uuid" : "88e08edf-b289-46ae-8279-046dfefbc1a3"
+}
+
+{
+        "_id" : ObjectId("4f7e1819ed14f435cc000001"),
+        "results_by_host" : {
+                "MTI3LjAuMC4x" : [
+                        {
+                                "description" : "The remote web server type is :\n\nApache/2.2.16 (Debian)\n\n\nSolution : You can set the directive 'ServerTokens Prod' to limit\nthe information emanating from the server in its response headers.",
+                                "service" : "http (80/tcp)",
+                                "bid" : null,
+                                "risk_factor" : "None",
+                                "threat" : "Low",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.10107",
+                                "cve" : null,
+                                "cvss" : null,
+                                "name" : "HTTP Server type and version"
+                        },
+                        {
+                                "description" : "Remote SMTP server banner :\n220 LISA ESMTP Sendmail 8.14.3/8.14.3/Debian-9.4; Thu, 5 Apr 2012 18:00:48 -0400; (No UCE/UBE) logging access from: localhost(OK)-localhost [127.0.0.1]\n\n\n\nThis is probably: Sendmail version 8.14.3",
+                                "service" : "submission (587/tcp)",
+                                "bid" : null,
+                                "risk_factor" : "Low",
+                                "threat" : "Low",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.10263",
+                                "cve" : null,
+                                "cvss" : null,
+                                "name" : "SMTP Server type and version"
+                        },
+                        {
+                                "description" : "Remote SMTP server banner :\n220 LISA ESMTP Sendmail 8.14.3/8.14.3/Debian-9.4; Thu, 5 Apr 2012 18:00:48 -0400; (No UCE/UBE) logging access from: localhost(OK)-localhost [127.0.0.1]\n\n\n\nThis is probably: Sendmail version 8.14.3",
+                                "service" : "smtp (25/tcp)",
+                                "bid" : null,
+                                "risk_factor" : "Low",
+                                "threat" : "Low",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.10263",
+                                "cve" : null,
+                                "cvss" : null,
+                                "name" : "SMTP Server type and version"
+                        },
+                        {
+                                "description" : "ICMP based OS fingerprint results: (92% confidence)\n\nLinux Kernel",
+                                "service" : "general/tcp",
+                                "bid" : null,
+                                "risk_factor" : "None",
+                                "threat" : "Log",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.102002",
+                                "cve" : null,
+                                "cvss" : "0.0",
+                                "name" : "OS fingerprinting"
+                        },
+                        {
+                                "description" : "Apache Web Server version 2.2.16 was detected on the host",
+                                "service" : "general/tcp",
+                                "bid" : null,
+                                "risk_factor" : "None",
+                                "threat" : "Low",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.900498",
+                                "cve" : null,
+                                "cvss" : null,
+                                "name" : "Apache Web ServerVersion Detection"
+                        },
+                        {
+                                "description" : "The following directories were discovered:\n/cgi-bin, /doc, /icons, /manual, /server-status\n\nWhile this is not, in and of itself, a bug, you should manually inspect \nthese directories to ensure that they are in compliance with company\nsecurity standards\n\nOther references : OWASP:OWASP-CM-006",
+                                "service" : "http (80/tcp)",
+                                "bid" : null,
+                                "risk_factor" : "None",
+                                "threat" : "Low",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.11032",
+                                "cve" : null,
+                                "cvss" : null,
+                                "name" : "Directory Scanner"
+                        },
+                        {
+                                "description" : "Detected SSH server version: SSH-2.0-OpenSSH_5.5p1 Debian-6+squeeze1\nRemote SSH supported authentication: publickey,password\nRemote SSH banner: \n(not available)\n\nCPE: cpe:/a:openbsd:openssh:5.5p1\n\nConcluded from remote connection attempt with credentials:\n  Login: OpenVAS\n  Password: OpenVAS",
+                                "service" : "ssh (22/tcp)",
+                                "bid" : null,
+                                "risk_factor" : "None",
+                                "threat" : "Log",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.10267",
+                                "cve" : null,
+                                "cvss" : "0.0",
+                                "name" : "SSH Server type and version"
+                        },
+                        {
+                                "description" : "The remote SSH Server supports the following SSH Protocol Versions:\n1.99\n2.0\n\nSSHv2 Fingerprint: 25:c5:97:c8:ed:4e:57:12:b4:05:3a:7f:9d:06:42:be",
+                                "service" : "ssh (22/tcp)",
+                                "bid" : null,
+                                "risk_factor" : "None",
+                                "threat" : "Log",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.100259",
+                                "cve" : null,
+                                "cvss" : "0.0",
+                                "name" : "SSH Protocol Versions Supported"
+                        },
+                        {
+                                "description" : "Sendmail version 8.14.3 was detected on the host",
+                                "service" : "general/tcp",
+                                "bid" : null,
+                                "risk_factor" : "None",
+                                "threat" : "Low",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.800608",
+                                "cve" : null,
+                                "cvss" : null,
+                                "name" : "Sendmail Version Detection"
+                        },
+                        {
+                                "description" : "Sendmail version 8.14.3 was detected on the host",
+                                "service" : "general/tcp",
+                                "bid" : null,
+                                "risk_factor" : "None",
+                                "threat" : "Low",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.800608",
+                                "cve" : null,
+                                "cvss" : null,
+                                "name" : "Sendmail Version Detection"
+                        },
+                        {
+                                "description" : "Overview:\nA weakness has been discovered in Apache web servers that are\nconfigured to use the FileETag directive. Due to the way in which\nApache generates ETag response headers, it may be possible for an\nattacker to obtain sensitive information regarding server files.\nSpecifically, ETag header fields returned to a client contain the\nfile's inode number.\n\nExploitation of this issue may provide an attacker with information\nthat may be used to launch further attacks against a target network.\n\nOpenBSD has released a patch that addresses this issue. Inode numbers\nreturned from the server are now encoded using a private hash to avoid\nthe release of sensitive information.\n\nSolution:\nOpenBSD has released a patch to address this issue.\n\nNovell has released TID10090670 to advise users to apply the available\nworkaround of disabling the directive in the configuration file for\nApache releases on NetWare. Please see the attached Technical\nInformation Document for further details.\n\nReferences:\nhttps://www.securityfocus.com/bid/6939\nhttp://httpd.apache.org/docs/mod/core.html#fileetag\nhttp://www.openbsd.org/errata32.html\nhttp://support.novell.com/docs/Tids/Solutions/10090670.html\n\nInformation that was gathered:\nInode: 79567962\nSize: 177\n\nCVE : CVE-2003-1418\nBID : 6939",
+                                "service" : "http (80/tcp)",
+                                "bid" : "6939",
+                                "risk_factor" : "Medium",
+                                "threat" : "Medium",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.103122",
+                                "cve" : "CVE-2003-1418",
+                                "cvss" : "4.3",
+                                "name" : "Apache Web Server ETag Header Information Disclosure Weakness"
+                        },
+                        {
+                                "description" : "Requesting the URI /server-status gives information about\nthe currently running Apache.\n\nSolution : \nIf you don't use this feature, comment the appropriate section in\nyour httpd.conf file. If you really need it, limit its access to\nthe administrator's machine.",
+                                "service" : "http (80/tcp)",
+                                "bid" : null,
+                                "risk_factor" : "Low",
+                                "threat" : "Medium",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.10677",
+                                "cve" : null,
+                                "cvss" : null,
+                                "name" : "Apache /server-status accessible"
+                        },
+                        {
+                                "description" : "Overview:\n  The Mailserver on this host answers to VRFY and/or EXPN requests.\n  VRFY and EXPN ask the server for information about an address. They are\n  inherently unusable through firewalls, gateways, mail exchangers for part-time\n  hosts, etc. OpenVAS suggests that, if you really want to publish this type of\n  information, you use a mechanism that legitimate users actually know about,\n  such as Finger or HTTP. \n\n Solution:\n  Disable VRFY and/or EXPN on your Mailserver. \n  For postfix add 'disable_vrfy_command=yes' in 'main.cf'. \n  For Sendmail add the option 'O PrivacyOptions=goaway'.\n\n See also:\n  http://cr.yp.to/smtp/vrfy.html\n\nDetails:\n\n'VRFY root' produces the following answer: 250 2.1.5 root <root@LISA>\n\n'EXPN root' produces the following answer: 250 2.1.5 root <root@LISA>",
+                                "service" : "submission (587/tcp)",
+                                "bid" : null,
+                                "risk_factor" : "Medium",
+                                "threat" : "Medium",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.100072",
+                                "cve" : null,
+                                "cvss" : null,
+                                "name" : "Check if Mailserver answer to VRFY and EXPN requests"
+                        },
+                        {
+                                "description" : "Overview:\n  The Mailserver on this host answers to VRFY and/or EXPN requests.\n  VRFY and EXPN ask the server for information about an address. They are\n  inherently unusable through firewalls, gateways, mail exchangers for part-time\n  hosts, etc. OpenVAS suggests that, if you really want to publish this type of\n  information, you use a mechanism that legitimate users actually know about,\n  such as Finger or HTTP. \n\n Solution:\n  Disable VRFY and/or EXPN on your Mailserver. \n  For postfix add 'disable_vrfy_command=yes' in 'main.cf'. \n  For Sendmail add the option 'O PrivacyOptions=goaway'.\n\n See also:\n  http://cr.yp.to/smtp/vrfy.html\n\nDetails:\n\n'VRFY root' produces the following answer: 250 2.1.5 root <root@LISA>\n\n'EXPN root' produces the following answer: 250 2.1.5 root <root@LISA>",
+                                "service" : "smtp (25/tcp)",
+                                "bid" : null,
+                                "risk_factor" : "Medium",
+                                "threat" : "Medium",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.100072",
+                                "cve" : null,
+                                "cvss" : null,
+                                "name" : "Check if Mailserver answer to VRFY and EXPN requests"
+                        },
+                        {
+                                "description" : "Server will not supports SSLv2 Ciphers.\n\nServer will not supports SSLv3 Ciphers.\n\nServer will not supports TLSv1 Ciphers.\n\nNone of the weak ciphers are supported",
+                                "service" : "otp (9390/tcp)",
+                                "bid" : null,
+                                "risk_factor" : null,
+                                "threat" : "Log",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.103441",
+                                "cve" : null,
+                                "cvss" : null,
+                                "name" : "Check for supported SSL Ciphers"
+                        },
+                        {
+                                "description" : "The /doc directory is browsable.\n/doc shows the content of the /usr/doc directory and therefore it shows which programs and - important! - the version of the installed programs.\n\nSolution : Use access restrictions for the /doc directory.\nIf you use Apache you might use this in your access.conf:\n\n <Directory /usr/doc>\n AllowOverride None\n order deny,allow\n deny from all\n allow from localhost\n </Directory>\nCVE : CVE-1999-0678\nBID : 318",
+                                "service" : "http (80/tcp)",
+                                "bid" : "318",
+                                "risk_factor" : "Medium",
+                                "threat" : "Medium",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.10056",
+                                "cve" : "CVE-1999-0678",
+                                "cvss" : "5.0",
+                                "name" : "/doc directory browsable ?"
+                        },
+                        {
+                                "description" : "Overview:\nSendmail is prone to a security-bypass vulnerability because the\napplication fails to properly validate the domain name in a signed CA\ncertificate, allowing attackers to substitute malicious SSL\ncertificates for trusted ones.\n\nSuccessfully exploiting this issue allows attackers to perform man-in-the-\nmiddle attacks or impersonate trusted servers, which will aid in\nfurther attacks.\n\nVersions prior to Sendmail 8.14.4 are vulnerable.\n\nSolution:\nUpdates are available. Please see the references for more information.\n\nReferences:\nhttp://www.securityfocus.com/bid/37543\nhttp://www.sendmail.org/releases/8.14.4\nhttp://www.sendmail.org/\nCVE : CVE-2009-4565\nBID : 37543",
+                                "service" : "submission (587/tcp)",
+                                "bid" : "37543",
+                                "risk_factor" : "High",
+                                "threat" : "High",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.100415",
+                                "cve" : "CVE-2009-4565",
+                                "cvss" : "7.5",
+                                "name" : "Sendmail NULL Character CA SSL Certificate Validation Security Bypass Vulnerability"
+                        },
+                        {
+                                "description" : "Overview:\nSendmail is prone to a security-bypass vulnerability because the\napplication fails to properly validate the domain name in a signed CA\ncertificate, allowing attackers to substitute malicious SSL\ncertificates for trusted ones.\n\nSuccessfully exploiting this issue allows attackers to perform man-in-the-\nmiddle attacks or impersonate trusted servers, which will aid in\nfurther attacks.\n\nVersions prior to Sendmail 8.14.4 are vulnerable.\n\nSolution:\nUpdates are available. Please see the references for more information.\n\nReferences:\nhttp://www.securityfocus.com/bid/37543\nhttp://www.sendmail.org/releases/8.14.4\nhttp://www.sendmail.org/\nCVE : CVE-2009-4565\nBID : 37543",
+                                "service" : "smtp (25/tcp)",
+                                "bid" : "37543",
+                                "risk_factor" : "High",
+                                "threat" : "High",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.100415",
+                                "cve" : "CVE-2009-4565",
+                                "cvss" : "7.5",
+                                "name" : "Sendmail NULL Character CA SSL Certificate Validation Security Bypass Vulnerability"
+                        },
+                        {
+                                "description" : "Overview:\n  This host is installed with SendMail and is prone to mail relay\n  vulnerability.\n\n  Vulnerability Insight:\n  The flaw is caused due to an error in the mailconf module in Linuxconf which\n  generates the Sendmail configuration file (sendmail.cf) and configures\n  Sendmail to run as an open mail relay, which allows remote attackers to send\n  Spam email.\n\n  Impact:\n  Successful exploitation will let the attackers to send email messages outside\n  of the served network. This could result in unauthorized messages being sent\n  from the vulnerable server.\n\n  Impact Level: Application/System\n\n  Affected Software/OS:\n  Linuxconf versions 1.24 r2, 1.2.5 r3\n  Linuxconf versions 1.24 r2, 1.2.5 r3 on Conectiva Linux 6.0 through 8\n  IBM AIX versions 4.3, 4.3.1, 4.3.2, 4.3.3, 5.1, 5.1 L, 5.2\n\n  Fix: Upgrade to the latest version of Linuxconf version 1.29r1 or later\n  For updates refer, http://www.solucorp.qc.ca/linuxconf/\n\n  For IBM AIX, apply the patch from below link\n  ftp://aix.software.ibm.com/aix/efixes/security/sendmail_3_mod.tar.Z\n\n  References:\n  http://osvdb.org/6066\n  http://xforce.iss.net/xforce/xfdb/10554\n  http://www.securityfocus.com/bid/6118/solution \nCVE : CVE-2002-1278, CVE-2003-0285\nBID : 6118, 7580",
+                                "service" : "smtp (25/tcp)",
+                                "bid" : "6118, 7580",
+                                "risk_factor" : "High",
+                                "threat" : "High",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.802194",
+                                "cve" : "CVE-2002-1278, CVE-2003-0285",
+                                "cvss" : "7.5",
+                                "name" : "SendMail Mail Relay Vulnerability"
+                        },
+                        {
+                                "description" : "127.0.0.1|cpe:/a:apache:http_server:2.2.16\n127.0.0.1|cpe:/a:sendmail:sendmail:8.14.3\n127.0.0.1|cpe:/a:openbsd:openssh:5.5p1\n127.0.0.1|cpe:/o:debian:debian_linux",
+                                "service" : "general/CPE-T",
+                                "bid" : null,
+                                "risk_factor" : "None",
+                                "threat" : "Log",
+                                "nvtid" : "1.3.6.1.4.1.25623.1.0.810002",
+                                "cve" : null,
+                                "cvss" : "0.0",
+                                "name" : "CPE Inventory"
+                        }
+                ]
+        },
+        "scan_info" : {
+                "command" : "",
+                "version" : "4.0.6",
+                "scan_start" : "Thu Apr  5 18:00:38 2012",
+                "scan_end" : "Thu Apr  5 18:09:10 2012",
+                "extrainfo" : "Plugin feed version : 201203261201"
+        },
+        "report_uuid" : "9380ccdd-ab6c-4ae3-ab10-4eac0bab5bfb"
+}

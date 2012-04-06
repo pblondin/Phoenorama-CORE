@@ -1,0 +1,57 @@
+{
+        "_id" : ObjectId("4f7f11efed14f436eb000000"),
+        "description" : "Nmap scan against localhost",
+        "name" : "Basic NMAP Test",
+        "report_uuid" : "b9ccc3f9-322c-493f-814c-b69adcbd931d",
+        "status" : "DONE",
+        "target" : "localhost",
+        "task_uuid" : "dbde8952-1750-4201-90d5-dd5a32cc59f4"
+}
+
+{
+        "_id" : ObjectId("4f7f11f6ed14f436ea000000"),
+        "results_by_host" : {
+                "bG9jYWxob3N0" : [
+                        {
+                                "product" : "OpenSSH",
+                                "portid" : "22",
+                                "service" : "ssh",
+                                "scriptid" : "ssh-hostkey",
+                                "version" : "5.5p1 Debian 6+squeeze1",
+                                "output" : "1024 9f:d0:02:3e:c1:c6:c3:cd:32:bb:72:ff:e9:ac:74:62 (DSA)\n2048 25:c5:97:c8:ed:4e:57:12:b4:05:3a:7f:9d:06:42:be (RSA)"
+                        },
+                        {
+                                "product" : "Sendmail",
+                                "portid" : "25",
+                                "service" : "smtp",
+                                "scriptid" : "smtp-commands",
+                                "version" : "8.14.3/8.14.3/Debian-9.4",
+                                "output" : "LISA Hello localhost [127.0.0.1], pleased to meet you, ENHANCEDSTATUSCODES, PIPELINING, EXPN, VERB, 8BITMIME, SIZE, DSN, ETRN, DELIVERBY, HELP\n 2.0.0 This is sendmail version 8.14.3 2.0.0 Topics: 2.0.0 HELO EHLO MAIL RCPT DATA 2.0.0 RSET NOOP QUIT HELP VRFY 2.0.0 EXPN VERB ETRN DSN AUTH 2.0.0 STARTTLS 2.0.0 For more info use \"HELP <topic>\". 2.0.0 To report bugs in the implementation see 2.0.0 http://www.sendmail.org/email-addresses.html 2.0.0 For local information send email to Postmaster at your site. 2.0.0 End of HELP info"
+                        },
+                        {
+                                "product" : "Apache httpd",
+                                "portid" : "80",
+                                "service" : "http",
+                                "scriptid" : "http-title",
+                                "version" : "2.2.16",
+                                "output" : "Site doesn't have a title (text/html)."
+                        },
+                        {
+                                "product" : "Sendmail",
+                                "portid" : "587",
+                                "service" : "smtp",
+                                "scriptid" : "smtp-commands",
+                                "version" : "8.14.3/8.14.3/Debian-9.4",
+                                "output" : "LISA Hello localhost [127.0.0.1], pleased to meet you, ENHANCEDSTATUSCODES, PIPELINING, EXPN, VERB, 8BITMIME, SIZE, DSN, DELIVERBY, HELP\n 2.0.0 This is sendmail version 8.14.3 2.0.0 Topics: 2.0.0 HELO EHLO MAIL RCPT DATA 2.0.0 RSET NOOP QUIT HELP VRFY 2.0.0 EXPN VERB ETRN DSN AUTH 2.0.0 STARTTLS 2.0.0 For more info use \"HELP <topic>\". 2.0.0 To report bugs in the implementation see 2.0.0 http://www.sendmail.org/email-addresses.html 2.0.0 For local information send email to Postmaster at your site. 2.0.0 End of HELP info"
+                        }
+                ]
+        },
+        "scan_info" : {
+                "command" : "/usr/local/bin/nmap-5.51 -PN -sT -sV -sC -A -T4 -oX - localhost",
+                "version" : "5.51",
+                "scan_start" : "Fri Apr  6 11:55:27 2012",
+                "scan_end" : "Fri Apr  6 11:55:34 2012",
+                "extrainfo" : "Nmap done at Fri Apr  6 11:55:34 2012; 1 IP address (1 host up) scanned in 6.79 seconds"
+        },
+        "report_uuid" : "b9ccc3f9-322c-493f-814c-b69adcbd931d"
+}
