@@ -75,6 +75,7 @@ def run(openvas, **kwargs):
     # Update OpenVAS Task status, task_uuid and report_uuid
     __updateOpenvas(openvas, {'status': "RUNNING", 'task_uuid': task_uuid, 'report_uuid': report_uuid})
     # Update local OpenVAS Task instance with task_uuid
+    # @TODO TO FIX!
     openvas.task_uuid = task_uuid
     
     # Wait till scan is finished
@@ -153,9 +154,9 @@ def __configure(target, **kwargs):
     
     return task_uuid.strip()
                    
-def __saveReport(reportUuid):
+def __saveReport(report_uuid):
 
-    getReport_task = "--get-report %s" % (reportUuid)
+    getReport_task = "--get-report %s" % (report_uuid)
     cmd = shlex.split(TOOL_PATH + getReport_task)
     report_xml = subprocess.Popen(cmd, stdout=subprocess.PIPE).communicate()[0]    
     #@TODO: check if output result is valid
