@@ -33,7 +33,7 @@ from models import Report
 
 def parse(document):
     root = etree.parse(document)    
-    report = Report(uuid.uuid4())
+    report = Report(str(uuid.uuid4()))
       
     # Fill the scan_info dictionary
     report.scan_info['scan_start'] = root.xpath('//@startstr')[0]
