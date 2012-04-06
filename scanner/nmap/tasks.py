@@ -30,17 +30,27 @@ Nmap Task Wrapper
 @author: r00tmac
 '''
 
-import shlex, subprocess, re, uuid
+import shlex, subprocess, re, uuid, time
+from StringIO import StringIO
+from pymongo import Connection
+from parser import parse
 from celery.task import task
 
 TOOL_PATH = '/usr/local/bin/nmap-5.51 -PN -sT -sV -sC -A -T4 -oX - ' # Make sure the leave a space at the end
+
+@task(name="nmap.save")
+def save(nmap, **kwargs):
+    logger = save.get_logger()
+    
+    nampTask = Connection().phoenorama.nmapTask
+    nampTask.insert(nmap.toJSON())
+    
+    logger.info("Nmap Task was successfully saved")
 
 @task(name="nmap.run")
 def run(target, **kwargs):
     '''
     Start nmap task
-    
-    @postcondition: 
     '''
     logger = run.get_logger()
     
@@ -50,17 +60,18 @@ def run(target, **kwargs):
     
     #TODO: Validate start_task status
     
-    logger.info("Report_xml %s" % report_xml)
-    logger.info("Task is successfully started")
+    # Save report
+    report = parse(StringIO(report_xml))    
+    nmapReport = Connection().phoenorama.nmapReport
+    nmapReport.insert(report.toJSON())
+
+    logger.info("Report id: %s was successfully generated and saved to DB" % report.report_uuid)
     return report_xml
 
 @task(name="nmap.getStatus")
 def getStatus(taskUuid):
     pass
-    
-@task(name="nmap.saveReport")
-def saveReport(reportUuid):
-    pass
+
 
 @task(name="nmap.cleanup")
 def cleanup():
@@ -69,3 +80,16 @@ def cleanup():
 #############################################
 # Private methods
 #############################################
+
+def __updateNmap(nmap, fieldsToUpdate):
+    nmapTask = Connection().phoenorama.nmapTask
+    nmapTask.update({'task_uuid': nmap.task_uuid}, {'$set' : fieldsToUpdate})
+    return "Nmap was successfully updated"
+
+
+
+
+
+
+
+
