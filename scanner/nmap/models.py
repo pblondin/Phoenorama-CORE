@@ -26,3 +26,30 @@ Created on Apr 2, 2012
 
 @author: r00tme
 '''
+class Nmap():
+    def __init__(self):
+        self.task_uuid = ''
+        self.name = ''
+        self.description = ''
+        self.target = ''
+        self.report_uuid = ''
+        self.status = ''
+            
+    def toJSON(self):
+        json = {'task_uuid' : self.task_uuid,
+                'report_uuid' : self.report_uuid,
+                'name': self.name,
+                'description': self.description,
+                'target': self.target,
+                'status': self.status
+                }
+        return json
+    
+class Report():
+    def __init__(self, reportUuid=''):
+        self.reportUuid = reportUuid
+        self.scan_info = {}
+        self.results_by_host = {}
+                                 
+    def getHosts(self):
+        return self.results_by_host.keys()
