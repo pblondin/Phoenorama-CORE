@@ -47,8 +47,8 @@ class Openvas():
         return json
 
 class Report():
-    def __init__(self, reportUuid=''):
-        self.reportUuid = reportUuid
+    def __init__(self, report_uuid=''):
+        self.report_uuid = report_uuid
         self.scan_info = {}
         self.results_by_host = {}
                                  
@@ -112,7 +112,7 @@ class Report():
         return self.printSummary()
     
     def toJSON(self):
-        json = {'report_uuid' : self.reportUuid,
+        json = {'report_uuid' : self.report_uuid,
                 'scan_info' : self.scan_info,
                 'results_by_host': self.results_by_host
                 }
